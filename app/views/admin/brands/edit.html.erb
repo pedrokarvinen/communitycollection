@@ -1,0 +1,38 @@
+<h1>Edit brand</h1>
+<form class="form-horizontal" enctype="multipart/form-data" action="/admin/brands/update/<%= @brand.id %>" method="post">
+  	<% content_for :head do %>
+	<% end %>
+	
+	<% unless @brand.errors.blank? %>
+	  <div class="alert">
+	    <button class="close" data-dismiss="alert">×</button>
+	    <strong>Warning!</strong> The brand could not be saved because of the following errors:
+	    <ul>
+	      <% @brand.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	
+	<input id="brand-id" type="hidden" class="input-xlarge" name="brand[id]" value="<%= @brand.id %>">
+	<fieldset>
+	  <div class="control-group">
+	    <label class="control-label" for="name">Name</label>
+	    <div class="controls">
+	      <input id="brand-name" type="text" class="input-xlarge" name="brand[name]" value="<%= @brand.name %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="about">About</label>
+	    <div class="controls">
+	      <textarea name="brand[about]" class="input-xlarge" rows="6"><%= @brand.about %></textarea>
+	    </div>
+	  </div>
+	</fieldset>
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save changes</button>
+	  <a href="/admin/brands" class="btn">Cancel</a>
+	</div>
+
+</form>

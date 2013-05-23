@@ -1,0 +1,42 @@
+#brands-roster {
+  margin-top: 22px;
+
+  h3 {
+    font-size: 20px;
+    font-family: 'bold', sans-serif;
+
+    a {
+      text-decoration: none;
+      color: #333;
+      padding: 0 10px;
+      @include simple-animation(.18s);
+
+      &:hover, &.selected {
+        color: $base_yellow;
+      }
+    }
+  }
+}
+
+#brands-roster-grid {
+  h2 {
+    font-size: 16px;
+    color: $base_yellow;
+    margin-top: 20px;
+  }
+
+  li {
+    margin-bottom: 3px;
+
+    a {
+      text-decoration: none;
+      font-size: 12px;
+      color: #333;
+
+      &:hover{
+        color: $base_orange;
+        text-decoration: line-through;
+      }
+    }
+  }
+}

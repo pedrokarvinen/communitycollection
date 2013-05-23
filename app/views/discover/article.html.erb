@@ -1,0 +1,153 @@
+<% content_for :after_scripts do %>
+  
+  <script>
+    $(function(){
+      CC.load_background("discover-background-gray-to-white.jpg");
+    });
+  </script>
+
+<% end %>
+
+
+<div id="breadcrum" class="container_24">
+  <nav class="discover">
+    <a href="/discover">Discover</a> /
+    <a href="/discover/by-brand">By Brand</a> /
+    <a href="/discover/by-brand/<%= @brand.slug %>"><%= @brand.name %></a> /
+    <a href="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>"><%= @initiative.name %></a> /
+    <a class="selected" href="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>/publication/<%= @article.slug %>"><%= @article.title%></a>
+  </nav>
+</div>
+
+<div class="grid_24 alpha omega page-header">
+  <h1 class="blue"><%= @initiative.name %><span><%= @article.title %></span></h1>
+  
+  <div id="back-button">
+    <a href="javascript:history.back()">Back<span></span></a>  
+  </div>
+</div>
+
+
+
+<div class="internal-splash clearfix">
+  
+  <div id="initiative-wide-splash">
+    <img src="https://communitycollection-staging.s3.amazonaws.com/uploads/Article/splash/<%= @article.id %>/<%= @article.splash %>" alt="">
+  </div>
+
+</div>
+
+
+
+<div class="content-grid clearfix">
+
+  <div class="subgrid-one-two-article clearfix">
+
+    <div class="one">
+      
+      <h2>About this Article</h2>
+
+      <p><small><%= @initiative.name %></small></p>
+
+      <%= @initiative.about %>
+
+      <div class="bottom-info">
+        <div class="grid_2 omega">
+          <p>Initiative</p>
+          <p>Related</p>
+        </div>
+        <div class="grid_5 alpha omega">
+          <p>
+            <a href="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>"><%= @initiative.name %></a>
+          </p>
+          <p>
+            <a href="http://nationalatlas.gov/articles/water/a_wateruse.html" target="_blank">— Water use in the US</a>
+            <br>
+            <a href="http://www.levistrauss.com/sustainability/planet/water" target="_blank">— Levi Strauss & Co.</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <!-- one end -->
+
+    <div class="two">
+      
+      <div class="wrapper wrapper-header">
+        <h2><%= @article.title %></h2>
+        <small>published: 01/23/2013</small>
+      </div>
+      
+      <div class="wrapper">
+        <%= @article.body %>
+      </div>
+
+      <div class="clearfixs"></div>
+
+      <div class="social-icons">
+        <ul>
+          <li><a href="#" class="social-icon rss">rss</a></li>
+          <li><a href="#" class="social-icon twitter">twitter</a></li>
+          <li><a href="#" class="social-icon msn">msn</a></li>
+          <li><a href="#" class="social-icon buzz">buzz</a></li>
+          <li><a href="#" class="social-icon facebook">facebook</a></li>
+          <li><a href="#" class="social-icon email">mail</a></li>
+          <li><a href="#" class="social-icon add">more</a></li>
+        </ul>
+      </div>
+      <!-- social-icons end -->
+
+      <div class="clearfix"></div>
+      
+
+      <div id="comments-section">
+        <header>
+          <h3><span>4</span> COMMENTS</h3>
+        </header>
+
+        <ul>
+          <li class="clearfix">
+            <img src="/assets/temp/avatar1.jpg" alt=" ">
+            <h3>MARY-ANN LEWIS <span>SAID:</span></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error, inventoreLorem ipsum dolor sit amet, consecteolor sit amet, consectetur adipisicing elit. Expedita, error, inventoreLorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error, inventore</p>
+            <p>Lorem ipsum dolor dolor sit amet, consectetdolor dolor sit amet, consectetur adipisicing elit. Expedita, error, inventore. <a href="#">REPLY</a></p>
+          </li>
+
+          <li class="clearfix">
+            <img src="/assets/temp/avatar2.jpg" alt=" ">
+            <h3>MARY-ANN LEWIS <span>SAID:</span></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error, inventoreLorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error. <a href="#">REPLY</a></p>
+
+            <div class="clearfix"></div>
+
+            <ul>
+              <li class="clearfix">
+                <img src="/assets/temp/avatar1.jpg" alt=" ">
+                <h3>NESTED <span>SAID:</span></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error, inventoreLorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error. <a href="#">REPLY</a></p>
+              </li>
+            </ul>
+
+          </li>
+
+          <li class="clearfix">
+            <img src="/assets/temp/avatar1.jpg" alt=" ">
+            <h3>MARY-ANN LEWIS <span>SAID:</span></h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error, inventoreLorem ipsum dolor sit amet, consecteolor sit amet, consectetur adipisicing elit. Expedita, error, inventoreLorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, error, inventore</p>
+            <p>Lorem ipsum dolor dolor sit amet, consectetdolor dolor sit amet, consectetur adipisicing elit. Expedita, error, inventore. <a href="#">REPLY</a></p>
+          </li>
+
+          
+        </ul>
+      </div>
+      <!-- comments-section end -->
+
+      
+    </div>
+    <!-- two end -->
+
+  </div>
+  <!-- subgrid-one-four end -->
+
+
+</div>

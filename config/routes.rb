@@ -1,4 +1,39 @@
 Communitycollection::Application.routes.draw do
+  
+  get "admin/brands/index"
+  get "admin/brands/new"
+  get "admin/brands/edit"
+  post "admin/brands/create"
+  post "admin/brands/update"
+  get "admin/brands/delete"
+
+  get "shop/index"
+  get "shop/brands"
+  
+  get "discover/index"
+  get "discover/bybrand"
+  get "discover/byinitiative"
+  get "discover/brand"
+  get "discover/initiative"
+  get "discover/article"
+  
+  root :to => 'shop#index'
+  
+  match 'shop' => 'shop#index';
+  
+  match 'discover' => 'discover#index';
+  match 'discover/by-brand' => 'discover#bybrand';
+  match 'discover/by-initiative' => 'discover#byinitiative'
+  match 'discover/by-brand/:brand' => 'discover#brand'
+  match 'discover/by-brand/:brand/:initiative' => 'discover#initiative'
+  match 'discover/by-brand/:brand/:initiative/publication/:article' => 'discover#article'
+  
+  match 'admin' => 'admin/brands#index';
+  match 'admin/brands' => 'admin/brands#index';
+  match 'admin/brands/:id' => 'admin/brands#edit';
+  match 'admin/brands/delete/:id' => 'admin/brands#delete'
+  match 'admin/brands/update/:id' => 'admin/brands#update'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

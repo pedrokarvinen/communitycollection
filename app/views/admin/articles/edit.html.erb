@@ -1,0 +1,4 @@
+<h1>Edit article</h1>
+<form class="form-horizontal" enctype="multipart/form-data" action="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/<%= @article.id %>" method="post">
+  <%= erb :'admin/articles/_form' %>
+</form>

@@ -1,0 +1,197 @@
+<% content_for :after_scripts do %>
+  
+  <script>
+    $(function(){
+      
+      CC.load_background("discover-background-gray-to-white.jpg");
+
+      var SortMenu = function(){
+
+        var elems = $('#brands-roster-grid ul li a');
+        var type;
+        var buttons = $('#brands-roster a').on('click', function(e){
+          
+          e.preventDefault();
+
+          type = $(this).data('type');
+          
+          buttons.removeClass('selected');
+          
+          $(this).addClass('selected');
+
+          elems.each(function(event) {
+
+            $(this).fadeOut(0);
+
+            if (type == "all"){
+              $(this).fadeIn(0);
+              return;
+            } 
+            
+            if( $(this).data('type') == type) {
+              $(this).delay(0).fadeIn(0);
+            }
+          });
+          
+        });
+
+      }();
+
+    });
+  </script>
+
+<% end %>
+
+
+
+<div class="grid_24 alpha omega page-navigation">
+  <ul>
+    <li><a href="/shop">latest</a><span>&nbsp;</span></li>
+    <li><a href="#">women</a><span>&nbsp;</span></li>
+    <li><a href="#">men</a><span>&nbsp;</span></li>
+    <li><a href="#">editorial</a><span>&nbsp;</span></li>
+    <li><a href="/shop/brands" class="selected">brands</a></li>
+  </ul>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="brands-roster">
+  <hgroup>
+    <h3>BRANDS / SORTED BY: <a class="selected" href="#" data-type="all">ALL</a>-<a href="#" data-type="women">WOMEN</a>-<a href="#" data-type="men">MEN</a></h3>
+  </hgroup>  
+</div>
+<!-- brands-roster end -->
+
+<div id="brands-roster-grid">
+
+  <div class="grid_8 alpha">
+    <h2>A-C</h2>
+    <ul>
+      <li><a href="#" data-type="all">A.P.C.</a></li>
+      <li><a href="#" data-type="all">A. Sauvage</a></li>
+      <li><a href="#" data-type="women">Acne</a></li>
+      <li><a href="#" data-type="all">Adidas Originals</a></li>
+      <li><a href="#" data-type="men">Adidas Originals x Ransom</a></li>
+      <li><a href="#" data-type="all">Adidas x Opening Ceremony</a></li>
+      <li><a href="#" data-type="men">Alexander McQueen</a></li>
+      <li><a href="#" data-type="all">Antenne Books</a></li>
+      <li><a href="#" data-type="women">Bernhard Willhelm</a></li>
+      <li><a href="#" data-type="women">Bernhard Willhelm x Camper Together</a></li>
+      <li><a href="#" data-type="all">Bjorg</a></li>
+      <li><a href="#" data-type="all">Boy London</a></li>
+      <li><a href="#" data-type="men">Bunney</a></li>
+      <li><a href="#" data-type="all">C6</a></li>
+      <li><a href="#" data-type="all">Carven</a></li>
+      <li><a href="#" data-type="men">Casio G-SHOCK</a></li>
+      <li><a href="#" data-type="all">Christophe Lemaire for BEAN POLE</a></li>
+      <li><a href="#" data-type="women">Christopher Kane</a></li>
+      <li><a href="#" data-type="all">Christopher Raeburn</a></li>
+      <li><a href="#" data-type="all">Christopher Shannon</a></li>
+      <li><a href="#" data-type="men">COMME des GARCONS Parfum</a></li>
+      <li><a href="#" data-type="women">COMME des GARCONS SHIRT</a></li>
+      <li><a href="#" data-type="all">COMME des GARCONS Wallet</a></li>
+      <li><a href="#" data-type="all">Common Projects</a></li>
+    </ul>
+
+    <h2>D-H</h2>
+    <ul>
+      <li><a href="#" data-type="all">Diemme</a></li>
+      <li><a href="#" data-type="all">Dita</a></li>
+      <li><a href="#" data-type="women">Dr.Martens</a></li>
+      <li><a href="#" data-type="all">DSquared2</a></li>
+      <li><a href="#" data-type="men">Eastpak x Kris Van Assche</a></li>
+      <li><a href="#" data-type="all">Eastpak x Wood Wood</a></li>
+      <li><a href="#" data-type="men">Ecoalf</a></li>
+      <li><a href="#" data-type="all">Gareth Pugh</a></li>
+      <li><a href="#" data-type="women">Hammerthor</a></li>
+      <li><a href="#" data-type="women">Happy Socks</a></li>
+      <li><a href="#" data-type="all">Humor</a></li>
+    </ul>
+  </div>
+
+  <div class="grid_8">
+    <h2>I-L</h2>
+    <ul>
+      <li><a href="#" data-type="all">Illesteva</a></li>
+      <li><a href="#" data-type="all">Indigofera Prima</a></li>
+      <li><a href="#" data-type="women">J.W.Anderson</a></li>
+      <li><a href="#" data-type="all">Jil Sander</a></li>
+      <li><a href="#" data-type="men">Kai and Sunny</a></li>
+      <li><a href="#" data-type="all">Kenzo</a></li>
+      <li><a href="#" data-type="men">Kenzo x Vans</a></li>
+      <li><a href="#" data-type="all">L.G.R. Sunglasses</a></li>
+      <li><a href="#" data-type="women">Levi's Made & Crafted</a></li>
+      <li><a href="#" data-type="women">Levi's Vintage Clothing</a></li>
+      <li><a href="#" data-type="all">Linda Farrow</a></li>
+    </ul>  
+
+    <h2>M-P</h2>
+    <ul>
+      <li><a href="#" data-type="all">M.Cohen</a></li>
+      <li><a href="#" data-type="women">Maison Martin Margiela</a></li>
+      <li><a href="#" data-type="all">Marc Jacobs</a></li>
+      <li><a href="#" data-type="women">Marc By Marc Jacobs</a></li>
+      <li><a href="#" data-type="all">master-piece</a></li>
+      <li><a href="#" data-type="all">Miansai</a></li>
+      <li><a href="#" data-type="women">Mr.Hare</a></li>
+      <li><a href="#" data-type="women">Mykita</a></li>
+      <li><a href="#" data-type="women">New Balance</a></li>
+      <li><a href="#" data-type="all">Nike</a></li>
+      <li><a href="#" data-type="men">Nike Gyakusou</a></li>
+      <li><a href="#" data-type="all">Nike SNW Made In Italy</a></li>
+      <li><a href="#" data-type="all">Nixon</a></li>
+      <li><a href="#" data-type="women">NN.07</a></li>
+      <li><a href="#" data-type="all">Nonnative</a></li>
+      <li><a href="#" data-type="women">Norse Projects</a></li>
+      <li><a href="#" data-type="all">Nudie Jeans</a></li>
+      <li><a href="#" data-type="all">Oakley</a></li>
+      <li><a href="#" data-type="men">Orjan Andersson</a></li>
+      <li><a href="#" data-type="women">Our Legacy</a></li>
+      <li><a href="#" data-type="all">Paul Smith</a></li>
+      <li><a href="#" data-type="all">Polo Ralph Lauren</a></li>
+      <li><a href="#" data-type="women">Porte Monnaie</a></li>
+      <li><a href="#" data-type="all">Porter</a></li>
+      <li><a href="#" data-type="all">Prim I Am</a></li>
+    </ul>
+
+  </div>
+
+  <div class="grid_8 omega">
+    
+    <h2>R-T</h2>
+    <ul>
+      <li><a href="#" data-type="all">Raf Simons</a></li>
+      <li><a href="#" data-type="all">Reebok</a></li>
+      <li><a href="#" data-type="all">Richar Nicoll</a></li>
+      <li><a href="#" data-type="women">Richer Poorer Socks</a></li>
+      <li><a href="#" data-type="men">Rick Owens</a></li>
+      <li><a href="#" data-type="all">Rick Owens Drkshdw</a></li>
+      <li><a href="#" data-type="women">Saucony</a></li>
+      <li><a href="#" data-type="all">Sheriff&Cherry</a></li>
+      <li><a href="#" data-type="men">SILENT By Damir Doma</a></li>
+      <li><a href="#" data-type="men">Steidl Ville</a></li>
+      <li><a href="#" data-type="all">Stone Island</a></li>
+      <li><a href="#" data-type="women">Stone Island Shadow Project</a></li>
+      <li><a href="#" data-type="women">T & F Slack</a></li>
+      <li><a href="#" data-type="women">The North Face</a></li>
+      <li><a href="#" data-type="men">Thom Browne</a></li>
+      <li><a href="#" data-type="all">Thom Krom</a></li>
+    </ul>
+
+    <h2>U-Y</h2>
+    <ul>
+      <li><a href="#" data-type="all">Undercover</a></li>
+      <li><a href="#" data-type="men">Uniform Wares</a></li>
+      <li><a href="#" data-type="women">Vans</a></li>
+      <li><a href="#" data-type="all">Vans Vault</a></li>
+      <li><a href="#" data-type="all">Veja</a></li>
+      <li><a href="#" data-type="women">Vivienne Westwood MAN</a></li>
+      <li><a href="#" data-type="all">Volta</a></li>
+      <li><a href="#" data-type="women">White Mountainnering</a></li>
+      <li><a href="#" data-type="men">YMC</a></li>
+    </ul>
+  </div>
+
+</div>
+<!-- brands-roster-grid end -->

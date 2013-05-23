@@ -1,0 +1,107 @@
+$section_height : 350px;
+$section_width  : 240px;
+
+#intro-splash {
+  margin-top: 100px;
+  height: $section_height;
+  width: 960px;
+  overflow: hidden;
+  background: white;
+  position: relative;
+  @include opacity(0);
+
+  .intro-section {
+    position: absolute;
+    float: left;
+    width:  $section_width * 2;
+    height: $section_height;
+    overflow: hiddens;
+
+    &:nth-child(1) { left: 0px;                }
+    &:nth-child(2) { left: $section_width;     }
+    &:nth-child(3) { left: $section_width * 2; }
+    &:nth-child(4) { left: $section_width * 3; }
+
+    @include perspective(1000px);
+    @include transform-style(preserve-3d);
+
+    &.opened {
+      z-index: 2000;
+    }
+
+    &.blue      .left-container, 
+    &.blue      .right-container {background: $base_blue;}
+    
+    &.yellow    .left-container, 
+    &.yellow    .right-container {background: $base_yellow;}
+    
+    &.orange    .left-container, 
+    &.orange    .right-container {background: $base_orange;}
+
+    &.dark-blue .left-container, 
+    &.dark-blue .right-container {background: $base_darkblue;}
+
+    
+    .left-container, .right-container {
+      position: relative;
+      width:  $section_width  - 50px;
+      height: $section_height - 50px;
+      float: left;
+      padding: 25px;
+      z-index: 1000;
+      color: white;
+      text-transform: uppercase;
+      font-family: "semibold", sans-serif;
+    }
+
+    .left-container {
+      background: $base_blue;
+      text-align: center;
+
+      img {
+        margin-bottom: 30px;
+        margin-top: 10px;
+      }
+    }
+
+    .right-container {
+      z-index: 999;
+      font-size: 12px;
+
+      @include simple-animation(.3s);
+
+      @include opacity(0);
+      @include transform(
+        rotateY(90deg) 
+        translateZ(-110px)
+      );
+
+      &.open {
+        @include opacity(1);
+        @include transform(
+          rotateY(0) 
+          translateX(0)
+        );
+      }
+
+      &.inverse {
+        
+        @include transform(
+          rotateY(-69deg) 
+          translateZ(170px)
+          translateX(-556px)
+        );
+
+        &.open {
+          @include opacity(1);
+          @include transform(
+            rotateY(0) 
+            translateZ(0)
+            translateX(-480px)
+          );
+        }
+      }
+    }
+  }
+}
+

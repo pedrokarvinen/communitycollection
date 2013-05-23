@@ -1,0 +1,326 @@
+<% content_for :after_scripts do %>
+  
+  <script>
+    $(function(){
+      CC.load_background("discover-background-gray-to-white.jpg");
+
+      $('body').addClass('shop');
+
+      $('#shop-header').fadeTo(0,0);
+
+      window.onload = function(){
+        $('#shop-header').fadeTo(1000,1);
+      }
+
+      var shopSlider = $('#shop-main-slider');
+
+      $(window).resize(function(){
+
+        var pos = (($(window).width()*.5) - (shopSlider.width()*.5))
+
+        if(window.sliderIdx == 0){pos += 967}
+        if(window.sliderIdx == 1){}
+        if(window.sliderIdx == 2){pos -= 963}
+
+        shopSlider.css(
+          'margin-left', pos
+        );
+      });
+
+      $(window).resize();
+
+      var snapped = false;
+
+      $(window).scroll(function () { 
+
+        if(!snapped){
+          
+          if($(window).scrollTop() > 510) {
+            
+            snapped = true;
+            
+            $('#shop-header').hide(100);
+            $("html, body").animate({scrollTop : 0}, 1500).removeClass('shop');
+          }
+        }
+
+      });
+
+      var ShopSlideshow = function(){
+        
+        var buttons = $('#shop-main-slider-wrapper li a');
+        var slider = $('#shop-main-slider');
+        var idx = 0;
+        var locked = false;
+          
+        buttons.on('click', function(e){
+
+          e.stopPropagation();
+          e.preventDefault();
+
+          if(!locked){
+
+            locked = true;
+
+            window.sliderIdx = idx = buttons.index($(this));
+
+            buttons.removeClass('selected').eq(idx).addClass('selected');
+
+            var center = ($(window).width()*.5) - (slider.width()*.5)
+
+            if(idx == 0) {
+              center += 967
+            }
+            if(idx == 1) {
+              
+            } 
+            if(idx == 2) {
+              center -= 963
+            }
+
+            slider.animate({
+              marginLeft : center
+            }, 1000, 'easeInOutExpo', function(){
+              locked = false;
+            });  
+          }
+
+        })
+
+        buttons.eq(1).click();
+
+      }();
+
+      var ToggleGrid = function(){
+        var button = $('#fiter-toggle');
+        var items = $('.quarter-column');
+
+        button.on('click', function(){
+          items.toggleClass('condensed')
+        })
+
+
+      }();
+
+
+      var ShowDetailPanel = function(){
+        var buttons = $('.shop-item-wrapper').on('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+
+          $(this).parent().parent().next().animate({
+            height: 'toggle'
+          },1000, 'easeInOutQuint');
+
+        });
+      }();
+      
+
+
+    });
+  </script>
+
+<% end %>
+
+
+
+<% content_for :shop_header do %>
+  
+  <div id="shop-header">
+    <div class="container_24">
+    
+      <a href="/" class="logo">
+        <img src="/assets/cc-logo.png" alt="">
+      </a>
+
+      <h1 class="huge">
+        Making the world<br>
+        a better place
+      </h1>
+
+      <a href="/discover" class="discover-now">Discover now<span>&nbsp;</span></a>
+
+      <div id="brands-ticker">
+        <img src="/assets/shop/brands-ticker.png" alt="Our Brands">
+      </div>
+
+    </div>
+  </div>
+
+<% end %>
+
+
+
+<div class="grid_24 alpha omega page-navigation">
+  <ul>
+    <li><a href="/shop" class="selected">latest</a><span>&nbsp;</span></li>
+    <li><a href="#">women</a><span>&nbsp;</span></li>
+    <li><a href="#">men</a><span>&nbsp;</span></li>
+    <li><a href="#">editorial</a><span>&nbsp;</span></li>
+    <li><a href="/shop/brands">brands</a></li>
+  </ul>
+</div>
+
+
+
+<% content_for :shop_main_slider do %>
+
+  <div id="shop-slider">
+    
+    <div id="shop-main-slider">
+
+      <img src="/assets/shop/splash/splash2.jpg" alt="">  
+      <img src="/assets/shop/splash/splash1.jpg" alt="">  
+      <img src="/assets/shop/splash/splash3.jpg" alt="">  
+
+    </div>
+
+    
+    <div class="container_24">
+      <div id="shop-main-slider-wrapper">
+        <ul>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+        </ul>
+      </div>  
+    </div>
+
+  </div>
+  <!-- shop-slider end -->
+
+  <div id="flexible-grid" class="container_24 clearfix">
+
+    <div id="fiter-toggle">
+      <!--  toggles filter visible/hidden -->
+    </div>
+    
+    <div class="quarter-column filter condenseds">
+      <h2>filter component</h2>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. Aliquam, autem voluptatem cupiditate quasi similique in qui optio libero possimus tempora.  
+    </div>
+
+
+
+    <div class="items-row clearfix">
+      
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item1.jpg" alt="">
+            <h5>levis</h5>
+            <h4>jacket sierra tone</h4>
+            <h3>U$S 35</h3>
+          </a>
+        </div>  
+      </div>
+
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item2.jpg" alt="">
+            <h5>industry of all nations</h5>
+            <h4>apartton</h4>
+            <h3>U$S 58</h3>
+          </a>
+        </div>  
+      </div>
+      
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item3.jpg" alt="">
+            <h5>industry of all nations</h5>
+            <h4>go green</h4>
+            <h3>U$S 76</h3>
+          </a>
+        </div>  
+      </div>
+
+    </div>
+    <!-- items-row end -->
+
+
+    <div class="item-description"></div>
+
+
+    <div class="items-row clearfix">
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item4.jpg" alt="">
+            <h5>levis</h5>
+            <h4>sandstorm</h4>
+            <h3>U$S 48</h3>
+          </a>
+        </div>  
+      </div>
+
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item5.jpg" alt="">
+            <h5>edun</h5>
+            <h4>amaquera</h4>
+            <h3>U$S 119</h3>
+          </a>
+        </div>  
+      </div>
+
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item6.jpg" alt="">
+            <h5>patagonia</h5>
+            <h4>chaquetone</h4>
+            <h3>U$S 224</h3>
+          </a>
+        </div>  
+      </div>
+    </div>
+    <!-- items-row end -->
+
+
+    <div class="item-description"></div>
+
+
+    <div class="items-row clearfix">
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item7.jpg" alt="">
+            <h5>alternative</h5>
+            <h4>lowride</h4>
+            <h3>U$S 78</h3>
+          </a>
+        </div>  
+      </div>
+
+      <div class="quarter-column condenseds">
+        <div class="shop-item-wrapper">
+          <div class="triangle"></div>
+          <a href="#">
+            <img src="/assets/shop/items/item8.jpg" alt="">
+            <h5>black apple</h5>
+            <h4>mamma</h4>
+            <h3>U$S 58</h3>
+          </a>
+        </div>  
+      </div>
+    </div>
+    <!-- items-row end -->
+
+    <div class="item-description"></div>
+
+  </div>
+  
+  
+<% end %>
+

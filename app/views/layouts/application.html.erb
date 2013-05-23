@@ -1,14 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Communitycollection</title>
+  <title>Community Collection</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  
+  
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+  <%= yield :after_stylesheets %>
+  
 </head>
 <body>
 
-<%= yield %>
+	<%= yield :shop_header %>
+
+	<% if (request.path_info.include? "/discover") %> 
+		<div id="main-menu" class="discover">
+	<% else %>
+		<div id="main-menu" class="shop">
+	<% end %>		
+			
+			<div class="container_24">	
+				<div class="grid_6 alpha">
+					<a href="/" class="logo">
+						<img src="/images/cc-logo.png" alt="">
+					</a>
+				</div>
+
+				<div class="grid_6">
+					<!-- flash notification container -->
+					&nbsp;
+				</div>
+
+				<div class="grid_2">
+					<a href="#">
+						<img class="search-icon" src="/assets/icon-search.png" alt="search"></div>
+					</a>
+				<nav>
+					
+					<div class="grid_3 menu discover">
+
+						<% if (controller.controller_name.include? "discover") %> 
+							<a class="discover selected" href="/discover">Discover</a>	
+						<% else %>
+							<a class="discover" href="/discover">Discover</a>
+						<% end %>
+						
+					</div>
+					
+					<div class="grid_3 menu shop">
+						<% if (controller.controller_name.include? "shop") %> 
+							<a class="shop selected" href="/shop">Shop</a>
+						<% else %>
+							<a class="shop" href="/shop">Shop</a>
+						<% end %>
+						
+					</div>
+					
+					<div class="grid_3 menu sign-in">
+						<a class="sign-in" href="#">Sign In</a>
+					</div>	
+
+				</nav>
+				
+				<div class="grid_1 omega">
+					<a href="#">
+						<img class="settings-icon" src="/assets/icon-settings.png" alt="settings">
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="container_24">
+
+			<%= yield %>
+
+		</div>
+
+		<%= yield :shop_main_slider %>
+		
+		<%= yield :after_scripts %>
 
 </body>
 </html>

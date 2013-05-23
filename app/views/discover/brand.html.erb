@@ -1,0 +1,132 @@
+<% content_for :after_scripts do %>
+  
+  <script>
+    $(function(){
+      CC.load_background("discover-background-levis.jpg");
+    });
+  </script>
+
+<% end %>
+
+
+<div id="breadcrum" class="container_24">
+  <nav class="discover">
+    <a href="/discover">Discover</a> /
+    <a href="/discover/by-brand">By Brand</a> /
+    <a class="selected" href="/discover/by-brand/<%= @brand.name %>"><%= @brand.name.titleize %></a>
+  </nav>
+</div>
+
+<div class="grid_24 alpha omega page-header">
+  <h1>Welcome to <%= @brand.name.titleize %></h1>
+</div>
+
+
+
+<div class="internal-splash clearfix">
+  <!-- left aligned -->
+  <div class="topics-component-container">
+    <img src="/assets/temp/levis-header.png" alt="">
+  </div>
+
+  <!-- left aligned -->
+  <div class="call-to-action">
+    
+    <div class="top">
+      <h2><span>890</span> people are getting access to products, design forumns and rivate events.</h2>
+      <h3>Support <bold><%= @brand.name.titleize %></bold> and get access to the same.</h3>
+      <a href="#">support this brand <span></span></a>
+    </div>
+    
+    <a href="#">
+      <div class="bottom">
+        <h4>already a supporter?</h4>
+        <h2>put your money where your mouth is...</h2>
+        <h5>go shopping now! <span></span></h5>
+      </div>  
+    </a>
+    
+
+  </div>
+  <!-- call-to-action end -->
+
+</div>
+
+
+
+<div class="content-grid clearfix">
+
+  <div class="subgrid-one-four clearfix">
+
+    <div class="one">
+      
+      <h2>About <%= @brand.name.titleize %></h2>
+      <%= @brand.about %>
+
+      <div class="bottom-info">
+        <div class="grid_2 omega">
+          <p>Website</p>
+          <p>Social</p>
+        </div>
+        <div class="grid_5 alpha omega">
+          <p>
+            <a href="http://us.levi.com/home/index.jsp" target="_blank">levi.com</a>
+          </p>
+          <p>
+            <a href="https://www.facebook.com/Levis" target="_blank">Facebook</a>
+            <a href="https://twitter.com/Levis" target="_blank">Twitter</a>
+            <!-- <a href="http://www.youtube.com/Levis" target="_blank">Youtube</a> -->
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <!-- one end -->
+
+    <% four = @brand.initiatives[0..3]  || [] %>
+    <% rest = @brand.initiatives[4..-1] || [] %>
+
+    <div class="four">
+      <% four.each_with_index do |initiative, i|%>
+
+        <div class="item grid one-third <%= i.even? ? 'alpha' : 'omega' %>" data-url="/discover/by-brand/<%= @brand.slug %>/<%= initiative.slug %>">
+          <div class="tags">
+            <ul>
+              <li><a class="tag w" href="#">W</a></li>
+              <li><a class="tag e" href="#">E</a></li>
+              <li><a class="tag m" href="#">M</a></li>
+              <!-- <li><a class="tag p" href="#">P</a></li> -->
+            </ul>
+          </div>
+          <div class="overlay"><img src="/assets/gallery/item-view-initiative.png" alt=""></div>
+          <div class="bg"><img src="https://communitycollection-staging.s3.amazonaws.com/uploads/Initiative/thumbnail/<%= initiative.id %>/<%= initiative.thumbnail %>" alt=" "></div>
+        </div>
+      <% end %>
+    </div>
+    <!-- four end -->
+
+  </div>
+  <!-- subgrid-one-four end -->
+
+
+
+  <div class="clearfix"></div>
+
+
+  <% rest.each_with_index do |initiative, i| %>
+    <div class="item grid one-third <%= 'alpha' if i % 3 == 0  %> <%= 'omega' if i % 3 == 2 %>" data-url="/discover/by-brand/<%= @brand.slug %>/<%= initiative.slug %>">
+      <div class="tags">
+        <ul>
+          <!-- <li><a class="tag w" href="#">W</a></li> -->
+          <li><a class="tag e" href="#">E</a></li>
+          <!-- <li><a class="tag m" href="#">M</a></li> -->
+          <li><a class="tag p" href="#">P</a></li>
+        </ul>
+      </div>
+      <div class="overlay"><img src="/assets/gallery/item-view-initiative.png" alt=""></div>
+      <div class="bg"><img src="<%= initiative.thumbnail %>" alt=" "></div>
+    </div>
+  <% end %>
+
+
+</div>

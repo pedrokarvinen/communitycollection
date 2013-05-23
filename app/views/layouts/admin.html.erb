@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CMS</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <%= stylesheet_link_tag    "bootstrap.css", :media => "all" %>
+    
+    <%= javascript_include_tag "application" %>
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      table.index .actions {
+        width: 228px;
+      }
+      table.index form {
+        display: inline;
+      }
+    </style>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+		
+
+    <%= yield :head %>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Community Collection</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="<%= 'active' if request.path == '/admin/brands' %>"><a href="/admin/brands">Brands</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div>
+        <% [:error, :success].each do |type| %>
+          <% if message = flash[type] %>
+            <div class="alert alert-<%= type %>">
+              <%= message %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="row">
+        <% if content_for? :sidebar %>
+          <div class="span3">
+            <%= yield :sidebar %>
+          </div>
+          <div class="span9">
+            <%= yield %>
+          </div>
+        <% else %>
+          <div class="span12">
+            <%= yield %>
+          </div>
+        <% end %>
+      </div>
+
+      <hr>
+
+    </div>
+
+    <%= javascript_include_tag "bootstrap" %>
+
+  </body>
+</html>

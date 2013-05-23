@@ -1,0 +1,123 @@
+<% content_for :after_scripts do %>
+  
+  <script>
+    $(function(){
+      CC.load_background("discover-background-waterless.jpg");
+    });
+  </script>
+
+<% end %>
+
+
+<div id="breadcrum" class="container_24">
+  <nav class="discover">
+    <a href="/discover">Discover</a> /
+    <a href="/discover/by-brand">By Brand</a> /
+    <a href="/discover/by-brand/<%= @brand.slug %>"><%= @brand.name %></a> /
+    <a class="selected" href="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>"><%= @initiative.name %></a>
+  </nav>
+</div>
+
+<div class="grid_24 alpha omega page-header">
+  <h1 class="blue"><%= @initiative.name %><span>initiative</span></h1>
+</div>
+
+
+
+<div class="internal-splash clearfix">
+  <!-- left aligned -->
+  <div class="initiative-component-container">
+    <div class="tags">
+      <ul>
+        <li><a class="tag w" href="#">W</a></li>
+        <li><a class="tag e" href="#">E</a></li>
+        <li><a class="tag m" href="#">M</a></li>
+        <!-- <li><a class="tag p" href="#">P</a></li> -->
+      </ul>
+    </div>
+    <img src="https://communitycollection-staging.s3.amazonaws.com/uploads/Initiative/splash/<%= @initiative.id %>/<%= @initiative.splash %>" alt="">
+  </div>
+
+  <!-- left aligned -->
+  <div class="call-to-action">
+    
+    <div class="top">
+      <h2><span>1284</span> people are supporting this initiative, getting access to <bold><%= @brand.name %>'s</bold> products, design forums and private events.</h2>
+      
+      <a href="#">support this brand <span></span></a>
+    </div>
+    
+    <a href="#">
+      <div class="bottom">
+        <h4>already a supporter?</h4>
+        <h2>put your money where your mouth is...</h2>
+        <h5>go shopping now! <span></span></h5>
+      </div>  
+    </a>
+    
+
+  </div>
+  <!-- call-to-action end -->
+
+</div>
+
+
+
+<div class="content-grid clearfix">
+
+  <div class="subgrid-one-two-three clearfix">
+
+    <div class="one">
+      
+      <h2>About <%= @initiative.name %></h2>
+      <%= @initiative.about  %>
+
+      <div class="bottom-info">
+        <div class="grid_2 omega">
+          <p>Website</p>
+          <p>Social</p>
+        </div>
+        <div class="grid_5 alpha omega">
+          <p>
+            <a href="http://store.levi.com/waterless/" target="_blank">levi.com/waterless</a>
+          </p>
+          <p>
+            <a href="https://twitter.com/Water" target="_blank">Twitter</a>
+            <a href="http://water.org/" target="_blank">water.org</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <!-- one end -->
+
+    <% two  = @initiative.articles[0..1]  || []%>
+    <% rest = @initiative.articles[2..-1] || [] %>
+
+    <div class="two">
+      <% two.each do |article| %>
+        <div class="item grid one-third alpha" data-url="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>/publication/<%= article.slug %>">
+          <div class="overlay"><img src="/assets/gallery/item-view-article.png" alt=""></div>
+          <div class="bg"><img src="https://communitycollection-staging.s3.amazonaws.com/uploads/Article/thumbnail/<%= article.id %>/<%= article.thumbnail %>" alt=" "></div>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="three">
+      <img src="/assets/gallery/initiatives/levis/waterless-right-aside.png" alt="">
+    </div>
+
+  </div>
+  <!-- subgrid-one-four end -->
+
+  <div class="clearfix"></div>
+
+  <% rest.each_with_index do |article, i| %>
+    <div class="item grid one-third <%= 'alpha' if i % 3 == 0 %> <%= 'omega' if i % 3 == 2 %>" data-url="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>/publication/<%= article.slug %>">
+      <div class="overlay"><img src="/assets/gallery/item-view-article.png" alt=""></div>
+      <div class="bg"><img src="<%= article.thumnail %>" alt=" "></div>
+    </div>
+  <% end %>
+
+</div>

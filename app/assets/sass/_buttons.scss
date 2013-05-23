@@ -1,0 +1,100 @@
+
+.button {
+
+  display: block;
+  margin-top: 20px;
+  position: relative;
+  background: #31b2dd;
+
+  @include simple_animation(.5s);
+
+  &:hover{
+    background: lighten(#31b2dd, 10%);
+  }
+
+  span {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    display: block;
+    width: 25px;
+    height: 25px;
+    text-indent: -99999px;
+    background: url(/assets/shop/shop-icon.png) no-repeat;
+    
+    -webkit-background-size: 100%;
+    background-size: 100%;
+  }
+
+  &.button-big {
+    text-decoration: none;
+    font-size: 35px;
+    font-family: "light", sans-serif;
+    color: white;
+    height: 110px;
+    text-indent: 17px;
+    line-height: 63px;
+  }
+
+  &.button-filters {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: white!important;
+    text-transform: uppercase;
+    text-shadow: -1px -1px #aaa;
+
+    @include simple_animation(.5s);
+
+    &.disabled {
+      background: #aaa!important;
+      color: #888!important;
+      cursor: default;
+
+      @include opacity(.8);
+    }
+
+    &.blue      {
+      background: $base_blue;
+      &:hover {background: lighten($base_blue, 10%);}
+    }
+    &.yellow    {
+      background: $base_yellow;
+      &:hover {background: lighten($base_yellow, 10%);}
+    }
+    &.orange    {
+      background: $base_orange;
+      &:hover {background: lighten($base_orange, 10%);}
+    }
+    &.darkblue  {
+      background: $base_darkblue;
+      &:hover {background: lighten($base_darkblue, 10%);}
+    }
+  }
+}
+
+.grid_12.omega.last {
+  margin-left: 15px;
+}
+
+.grid_6.filters {
+  width: 232px!important;
+  margin-right: 6px;
+  
+  &.last {
+    margin-right: 0;
+    width: 231px!important;
+  }
+}
+
+.more {
+  position: absolute;
+  bottom: 12px;
+  right: 13px;
+  text-decoration: none;
+  font-family: "regular", sans-serif;
+  color: white;
+  font-size: 12px;
+  text-align: right;
+}
