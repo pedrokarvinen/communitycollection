@@ -44,7 +44,15 @@
           <a class="brand" href="#">Community Collection</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="<%= 'active' if request.path == '/admin/brands' %>"><a href="/admin/brands">Brands</a></li>
+              <li class="<%= 'active' if controller.controller_name == 'brands' %>"><a href="/admin/brands">Brands</a></li>
+              <% if request.path.include?'/initiatives' %>
+              	<li class="<%= 'active' if controller.controller_name == 'initiatives' %>"><a href="/admin/brands/<%= @brand.id %>/initiatives">Initiatives</a></li>
+              <% end %>
+              
+              <% if request.path.include?'/articles' %>
+              	<li class="<%= 'active' if controller.controller_name == 'articles' %>"><a href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles">Articles</a></li>
+              <% end %>
+              
             </ul>
           </div>
         </div>

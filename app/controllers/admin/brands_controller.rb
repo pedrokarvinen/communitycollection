@@ -1,17 +1,16 @@
 class Admin::BrandsController < ApplicationController
+  layout "admin"
+  
   def index
     @brands = Brand.all
-    render :layout => 'admin'
   end
   
   def new
     @brand = Brand.new
-    render :layout => 'admin'
   end
   
   def edit
     @brand = Brand.find(params[:id])
-    render :layout => 'admin'
   end
   
   def create
@@ -20,7 +19,7 @@ class Admin::BrandsController < ApplicationController
       flash[:success] = "The brand was created correctly"
       redirect_to "/admin/brands"
     else
-      render :layout =>'admin/brands/new'
+      redirect_to "/admin/brands/new"
     end
   end
   

@@ -1,4 +1,48 @@
 <h1>Edit article</h1>
-<form class="form-horizontal" enctype="multipart/form-data" action="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/<%= @article.id %>" method="post">
-  <%= erb :'admin/articles/_form' %>
+<form class="form-horizontal" enctype="multipart/form-data" action="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/update/<%= @article.id %>" method="post">
+  	<% unless @article.errors.blank? %>
+	  <div class="alert">
+	    <button class="close" data-dismiss="alert">×</button>
+	    <strong>Warning!</strong> The article could not be saved because of the following errors:
+	    <ul>
+	      <% @article.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+
+	<input type="hidden" class="input-xlarge" name="article[id]" value="<%= @article.id %>">
+	
+	<fieldset>
+	  <div class="control-group">
+	    <label class="control-label" for="article[title]">Title</label>
+	    <div class="controls">
+	      <input type="text" class="input-xlarge" name="article[title]" value="<%= @article.title %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="article[body]">Body</label>
+	    <div class="controls">
+	      <textarea name="article[body]" class="input-xlarge" rows="6"><%= @article.body%></textarea>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="article[thumbnail]">Thumbnail [307x240]</label>
+	    <div class="controls">
+	      <input type="file" class="input-xlarge" name="article[thumbnail]">
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="article[splash]">Wide Splash [960x350]</label>
+	    <div class="controls">
+	      <input type="file" class="input-xlarge" name="article[splash]">
+	    </div>
+	  </div>
+	</fieldset>
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save changes</button>
+	  <a href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles" class="btn">Cancel</a>
+	</div>
+
 </form>
