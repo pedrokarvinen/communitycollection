@@ -94,9 +94,13 @@
       var ToggleGrid = function(){
         var button = $('#fiter-toggle');
         var items = $('.quarter-column');
+        var items_wrapper = $('.items-wrapper');
+        var items_description = $('.item-description');
 
         button.on('click', function(){
-          items.toggleClass('condensed')
+          items.toggleClass('condensed');
+          items_wrapper.toggleClass('condensed');
+          items_description.toggleClass('condensed');
         })
 
 
@@ -107,11 +111,72 @@
         var buttons = $('.shop-item-wrapper').on('click', function(e){
           e.preventDefault();
           e.stopPropagation();
-
-          $(this).parent().parent().next().animate({
+          
+          var target = $(this).data('target');
+          var items_row = $(this).parent().parent();
+          var isShowed = false;
+          
+          if($('.' + target).is(':visible') == true){
+          	$('.' + target).animate({
+	            height: 'toggle'
+	          },1000, 'easeInOutQuint');
+	          
+	          return;
+          }
+          
+ 
+          items_row.find('.item-description').each( function(){
+          	if($(this).is(':visible') == true){
+          		isShowed = true;
+          		$(this).animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint', 
+		          function(){
+		          	$('.' + target).animate({
+			            height: 'toggle'
+			          },1000, 'easeInOutQuint');
+			          
+		          });
+	          }
+          } );
+          
+          if(isShowed == false){
+          	$('.' + target).animate({
+	            height: 'toggle'
+	          },1000, 'easeInOutQuint');
+          }
+          
+          //$('html,body').animate({scrollTop: $('.' + target).offset().top}, 500);
+          
+          /*$(this).parent().parent().find('.item-description').animate({
             height: 'toggle'
           },1000, 'easeInOutQuint');
+	        
+          
+          
+          $(this).parent().parent().find('.quarter-column').find('h5').animate({
+            height: 'toggle'
+          },1000, 'easeInOutQuint');
+          $(this).parent().parent().find('.quarter-column').find('h4').animate({
+            height: 'toggle'
+          },1000, 'easeInOutQuint');
+          $(this).parent().parent().find('.quarter-column').find('h3').animate({
+            height: 'toggle'
+          },1000, 'easeInOutQuint');*/
+         
+          
+          //$(this).parent().parent().find('.triangle').toggleClass('description-view');
 
+        });
+        
+        // close the description view
+        $('.item-description .close-icon').on('click', function(e){
+        	e.preventDefault();
+          e.stopPropagation();
+          
+        	$(this).parent().animate({
+            height: 'toggle'
+          },1000, 'easeInOutQuint');
         });
       }();
       
@@ -195,130 +260,415 @@
       <!--  toggles filter visible/hidden -->
     </div>
     
-    <div class="quarter-column filter condenseds">
+    <div class="quarter-column filter">
       <h2>filter component</h2>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. Aliquam, autem voluptatem cupiditate quasi similique in qui optio libero possimus tempora.  
     </div>
 
 
+	<div class="items-wrapper">
+	    <div class="items-row clearfix">
+	      
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description1">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item1.jpg" alt="">
+	            <h5>levis</h5>
+	            <h4>jacket sierra tone</h4>
+	            <h3>U$S 35</h3>
+	          </a>
+	        </div>  
+	      </div>
+	      
+	
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description2">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item2.jpg" alt="">
+	            <h5>industry of all nations</h5>
+	            <h4>apartton</h4>
+	            <h3>U$S 58</h3>
+	          </a>
+	        </div>  
+	      </div>
+	      
+	     
+	      
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description3">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item3.jpg" alt="">
+	            <h5>industry of all nations</h5>
+	            <h4>go green</h4>
+	            <h3>U$S 76</h3>
+	          </a>
+	        </div>  
+	      </div>
+	      
+	      <!-- item description start -->
+	      <div class="item-description description1">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item1.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item1.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item1.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item1.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Levis</h3>
+		    		<h4>Jacket Sierra Tone</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$35</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	      <!-- item description start -->
+	      <div class="item-description description2">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item2.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item2.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item2.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item2.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Apartton</h3>
+		    		<h4>Industry of All Nations</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$58</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	      <!-- item description start -->
+	      <div class="item-description description3">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item3.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item3.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item3.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item3.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Go Green</h3>
+		    		<h4>Industry of All Nations</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$76</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	
+	    </div>
+	    <!-- items-row end -->
+	
+			<!-- items-row start -->
+	    <div class="items-row clearfix">
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description4">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item4.jpg" alt="">
+	            <h5>levis</h5>
+	            <h4>sandstorm</h4>
+	            <h3>U$S 48</h3>
+	          </a>
+	        </div>  
+	      </div>
+	
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description5">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item5.jpg" alt="">
+	            <h5>edun</h5>
+	            <h4>amaquera</h4>
+	            <h3>U$S 119</h3>
+	          </a>
+	        </div>  
+	      </div>
+	
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description6">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item6.jpg" alt="">
+	            <h5>patagonia</h5>
+	            <h4>chaquetone</h4>
+	            <h3>U$S 224</h3>
+	          </a>
+	        </div>  
+	      </div>
+	      
+	      <!-- item description start -->
+	      <div class="item-description description4">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item4.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item4.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item4.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item4.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Levis</h3>
+		    		<h4>Sandstorm</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$48</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	      <!-- item description start -->
+	      <div class="item-description description5">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item5.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item5.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item5.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item5.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Edun</h3>
+		    		<h4>Industry of All Nations</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$119</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	      <!-- item description start -->
+	      <div class="item-description description6">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item6.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item6.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item6.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item6.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Patagonia</h3>
+		    		<h4>Amaquera</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$224</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	       
+	    </div>
+	    <!-- items-row end -->
 
-    <div class="items-row clearfix">
-      
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item1.jpg" alt="">
-            <h5>levis</h5>
-            <h4>jacket sierra tone</h4>
-            <h3>U$S 35</h3>
-          </a>
-        </div>  
-      </div>
-
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item2.jpg" alt="">
-            <h5>industry of all nations</h5>
-            <h4>apartton</h4>
-            <h3>U$S 58</h3>
-          </a>
-        </div>  
-      </div>
-      
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item3.jpg" alt="">
-            <h5>industry of all nations</h5>
-            <h4>go green</h4>
-            <h3>U$S 76</h3>
-          </a>
-        </div>  
-      </div>
-
-    </div>
-    <!-- items-row end -->
-
-
-    <div class="item-description"></div>
-
-
-    <div class="items-row clearfix">
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item4.jpg" alt="">
-            <h5>levis</h5>
-            <h4>sandstorm</h4>
-            <h3>U$S 48</h3>
-          </a>
-        </div>  
-      </div>
-
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item5.jpg" alt="">
-            <h5>edun</h5>
-            <h4>amaquera</h4>
-            <h3>U$S 119</h3>
-          </a>
-        </div>  
-      </div>
-
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item6.jpg" alt="">
-            <h5>patagonia</h5>
-            <h4>chaquetone</h4>
-            <h3>U$S 224</h3>
-          </a>
-        </div>  
-      </div>
-    </div>
-    <!-- items-row end -->
-
-
-    <div class="item-description"></div>
-
-
-    <div class="items-row clearfix">
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item7.jpg" alt="">
-            <h5>alternative</h5>
-            <h4>lowride</h4>
-            <h3>U$S 78</h3>
-          </a>
-        </div>  
-      </div>
-
-      <div class="quarter-column condenseds">
-        <div class="shop-item-wrapper">
-          <div class="triangle"></div>
-          <a href="#">
-            <img src="/assets/shop/items/item8.jpg" alt="">
-            <h5>black apple</h5>
-            <h4>mamma</h4>
-            <h3>U$S 58</h3>
-          </a>
-        </div>  
-      </div>
-    </div>
-    <!-- items-row end -->
-
-    <div class="item-description"></div>
-
+	
+			<!-- items-row start -->
+	    <div class="items-row clearfix">
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description7">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item7.jpg" alt="">
+	            <h5>alternative</h5>
+	            <h4>lowride</h4>
+	            <h3>U$S 78</h3>
+	          </a>
+	        </div>  
+	      </div>
+	
+	      <div class="quarter-column condenseds">
+	        <div class="shop-item-wrapper" data-target="description8">
+	          <div class="triangle"></div>
+	          <a href="#">
+	            <img src="/assets/shop/items/item8.jpg" alt="">
+	            <h5>black apple</h5>
+	            <h4>mamma</h4>
+	            <h3>U$S 58</h3>
+	          </a>
+	        </div>  
+	      </div>
+	      
+	      <!-- item description start -->
+	      <div class="item-description description7">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item7.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item7.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item7.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item7.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Alternative</h3>
+		    		<h4>Lowride</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$78</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	      <!-- item description start -->
+	      <div class="item-description description8">
+	      	<div class="close-icon">
+	      		<a href="#"><img src="/assets/icons/close.png"></a>
+	      	</div>
+		    	<div class="image-wrapper">
+		    		<img src="/assets/shop/items/item8.jpg" alt="">
+		    	</div>
+		    	<div class="thumbs-wrapper">
+		    		<div class="item-thumb-wrapper">
+		    			<img src="/assets/shop/items/item8.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item8.jpg" alt="">
+		    		</div>
+		    		<div class="thumb-wrapper">
+		    			<img src="/assets/shop/items/item8.jpg" alt="">
+		    		</div>
+		    	</div>
+		    	<div class="description-wrapper">
+		    		<h3>Black Apple</h3>
+		    		<h4>Mamma</h4>
+		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
+		    		<div class="price">U$58</div>
+		    		
+		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
+		    		<div class="other-buttons">
+		    			<a href="#">ADD TO WISH LIST</a>
+		    			<a href="#" class="last">SHARE THIS ITEM</a>
+		    		</div>
+		    		
+		    	</div>
+	    	
+	       </div>
+	       <!--item description end -->
+	       
+	    </div>
+	    <!-- items-row end -->
+	
+	    <div class="item-description"></div>
+	    
+	    <div style="clear: both;"></div>
+	</div>
   </div>
   
   
