@@ -1,8 +1,22 @@
 <% content_for :after_scripts do %>
   
+  <style>
+  
+  </style>
   <script>
     $(function(){
       CC.load_background("discover-background-gray-to-white.jpg");
+      
+      // custom scollbar for filters in the left panel
+      if (!$.browser.webkit) {
+      	$('.section .root').jScrollPane();
+      }
+      
+      $('.section .root').hide();
+      
+      $('.quick-filters .root').show();
+      $('.product-type .root').show();
+      
 
       $('body').addClass('shop');
 
@@ -90,6 +104,18 @@
         buttons.eq(1).click();
 
       }();
+      
+      var ToggleFilter = function(){
+      	var section_titles = $('.section .title a').on('click', function(e){
+      		e.preventDefault();
+          e.stopPropagation();
+          
+          $(this).toggleClass('extended');
+          $(this).parent().next().animate({
+	            height: 'toggle'
+	          },1000, 'easeInOutQuint');
+      	});
+      }();
 
       var ToggleGrid = function(){
         var button = $('#fiter-toggle');
@@ -101,7 +127,18 @@
           items.toggleClass('condensed');
           items_wrapper.toggleClass('condensed');
           items_description.toggleClass('condensed');
-        })
+        });
+        
+        $('.close-filter a').on('click', function(e){
+					
+					e.preventDefault();
+          e.stopPropagation();
+          
+	        items.toggleClass('condensed');
+	        items_wrapper.toggleClass('condensed');
+	        items_description.toggleClass('condensed');
+	        
+	      });
 
 
       }();
@@ -112,15 +149,35 @@
           e.preventDefault();
           e.stopPropagation();
           
+          var item = $(this);
           var target = $(this).data('target');
           var items_row = $(this).parent().parent();
           var isShowed = false;
+          
+          items_row.children().find('.shop-item-wrapper').each(function(){
+          	if( $(this).is(item) == false ){
+          		$(this).removeClass('extended');
+          	}
+          });
+          
+          item.toggleClass('extended');
           
           if($('.' + target).is(':visible') == true){
           	$('.' + target).animate({
 	            height: 'toggle'
 	          },1000, 'easeInOutQuint');
 	          
+	          if( items_row.find('.quarter_column h5').is(':visible') == false ){
+	          	items_row.find('.quarter-column').find('h5').animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint');
+		          items_row.find('.quarter-column').find('h4').animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint');
+		          items_row.find('.quarter-column').find('h3').animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint');
+	          }
 	          return;
           }
           
@@ -137,6 +194,7 @@
 			          },1000, 'easeInOutQuint');
 			          
 		          });
+		          
 	          }
           } );
           
@@ -144,7 +202,31 @@
           	$('.' + target).animate({
 	            height: 'toggle'
 	          },1000, 'easeInOutQuint');
+	          
+	          if( items_row.find('.quarter_column h5').is(':visible') == false ){
+	          	items_row.find('.quarter-column').find('h5').animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint');
+		          items_row.find('.quarter-column').find('h4').animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint');
+		          items_row.find('.quarter-column').find('h3').animate({
+		            height: 'toggle'
+		          },1000, 'easeInOutQuint');
+	          }
+	          
           }
+          
+          
+          items_row.find('.item-description').each(function(){
+          	if( $(this).is(':visible') ){
+          		isShowed = true;
+          	}
+          });
+          
+          
+          //alert(isShowed);
+          	
           
           //$('html,body').animate({scrollTop: $('.' + target).offset().top}, 500);
           
@@ -177,6 +259,8 @@
         	$(this).parent().animate({
             height: 'toggle'
           },1000, 'easeInOutQuint');
+          
+          $(this).parent().parent().children().find('.extended').toggleClass('extended');
         });
       }();
       
@@ -260,10 +344,257 @@
       <!--  toggles filter visible/hidden -->
     </div>
     
+    <!-- filter start -->
     <div class="quarter-column filter">
-      <h2>filter component</h2>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. Aliquam, autem voluptatem cupiditate quasi similique in qui optio libero possimus tempora.  
+    	<!-- latest products wrapper start -->
+      <div class="latest-products-wrapper">
+      	<h2>LATEST PRODUCTS</h2>
+      	<div class="product-count">207 ITEMS</div>
+      	<ul class="recent-categories">
+      		<li><a href="#">ALL</a></li>
+      		<li><a href="#">JEANS</a></li>
+      		<li><a href="#">SUMMER</a></li>
+      	</ul>
+      </div>
+      <!-- latest products wrapper end -->
+      
+      <!-- filter hierarchy wrapper start -->
+      <div class="hierarchy-wrapper">
+      	<div class="refine-wrapper">
+      		<div class="close-filter">
+      			<a href="#"><img src="/assets/icons/filter-close.png"></a>
+      		</div>
+      		<div class="refine">REFINE YOUR SEARCH</div>
+      		
+      	</div>
+      	
+      	<!-- quick-filter section start -->
+      	<div class="quick-filters section">
+      		
+      		<div class="title">
+      			<a href="#">QUICK FILTERS</a>
+      		</div>
+      		
+      		<ul class="dropdown-menu root">
+      			<li class="dropdown-submenu">
+      				<a href="#"><b>GENRE</b></a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">ALL</a></li>
+      					<li><a href="#">MEN</a></li>
+      					<li><a href="#">WOMEN</a></li>
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#"><b>SORT BY</b></a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">RELEVANCE</a></li>
+      					<li><a href="#">PRICE</a></li>
+      					<li><a href="#">NEW IN</a></li>
+      				</ul>
+      			</li>
+      		</ul>
+      
+      	</div>
+      	<!-- quick-filter section end -->
+      	
+      	<!-- product-type section start -->
+      	<div class="product-type section">
+      		
+      		<div class="title">
+      			<a href="#">PRODUCT TYPE</a>
+      		</div>
+      		
+      		<ul class="dropdown-menu root">
+      			<li class="dropdown-submenu">
+      				<a href="#">CASUAL</a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">CASUAL JACKETS</a></li>
+      					<li><a href="#">CASUAL TROUSERS</a></li>
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">IPAD CASES</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">JEANS</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">KEYRINGS</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">KNITWEAR</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">PHONE ACCESSORIES</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">SCARVES</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">SHIRTS</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">TSHIRTS</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">WALLETS</a>
+      				<ul class="dropdown-menu"></ul>
+      			</li>
+      		</ul>
+      
+      	</div>
+      	<!-- product-type section end -->
+      	
+      	<!-- collections section start -->
+      	<div class="collections section">
+      		
+      		<div class="title">
+      			<a href="#">COLLECTIONS</a>
+      		</div>
+      		
+      		<ul class="dropdown-menu root">
+      			<li class="dropdown-submenu">
+      				<a href="#">LEVIS</a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">LEVI'S COMMUTER</a></li>
+      					<li><a href="#">FRIENDS OF MOCA</a></li>
+      					<li><a href="#">LEVI'S X FILSON</a></li>
+      					<li><a href="#">LINE 8</a></li>
+      					<li><a href="#">MADE IN USA</a></li>
+      					<li><a href="#">WATER LESS</a></li>
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">EDUN</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">INDUSTRY OF ALL NATIONS</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      		</ul>
+      
+      	</div>
+      	<!-- collections section end -->
+      	
+      	<!-- price section start -->
+      	<div class="price section">
+      		
+      		<div class="title">
+      			<a href="#">PRICE</a>
+      		</div>
+      		
+      		<ul class="dropdown-menu root">
+      			<li class="dropdown-submenu">
+      				<a href="#">LEVIS</a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">LEVI'S COMMUTER</a></li>
+      					<li><a href="#">FRIENDS OF MOCA</a></li>
+      					<li><a href="#">LEVI'S X FILSON</a></li>
+      					<li><a href="#">LINE 8</a></li>
+      					<li><a href="#">MADE IN USA</a></li>
+      					<li><a href="#">WATER LESS</a></li>
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">EDUN</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">INDUSTRY OF ALL NATIONS</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      		</ul>
+      
+      	</div>
+      	<!-- price section end -->
+      	
+      	<!-- color section start -->
+      	<div class="color section">
+      		
+      		<div class="title">
+      			<a href="#">COLOR</a>
+      		</div>
+      		
+      		<ul class="dropdown-menu root">
+      			<li class="dropdown-submenu">
+      				<a href="#">LEVIS</a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">LEVI'S COMMUTER</a></li>
+      					<li><a href="#">FRIENDS OF MOCA</a></li>
+      					<li><a href="#">LEVI'S X FILSON</a></li>
+      					<li><a href="#">LINE 8</a></li>
+      					<li><a href="#">MADE IN USA</a></li>
+      					<li><a href="#">WATER LESS</a></li>
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">EDUN</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">INDUSTRY OF ALL NATIONS</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      		</ul>
+      
+      	</div>
+      	<!-- color section end -->
+      	
+      	<!-- size section start -->
+      	<div class="size section">
+      		
+      		<div class="title">
+      			<a href="#">SIZE</a>
+      		</div>
+      		
+      		<ul class="dropdown-menu root">
+      			<li class="dropdown-submenu">
+      				<a href="#">LEVIS</a>
+      				<ul class="dropdown-menu">
+      					<li><a href="#">LEVI'S COMMUTER</a></li>
+      					<li><a href="#">FRIENDS OF MOCA</a></li>
+      					<li><a href="#">LEVI'S X FILSON</a></li>
+      					<li><a href="#">LINE 8</a></li>
+      					<li><a href="#">MADE IN USA</a></li>
+      					<li><a href="#">WATER LESS</a></li>
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">EDUN</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      			<li class="dropdown-submenu">
+      				<a href="#">INDUSTRY OF ALL NATIONS</a>
+      				<ul class="dropdown-menu">
+      				</ul>
+      			</li>
+      		</ul>
+      
+      	</div>
+      	<!-- size section end -->
+      	
+      	
+      </div>
+      <!-- filter hierarchy wrapper end -->
+      <div></div>  
     </div>
+    <!--filter end -->
 
 
 	<div class="items-wrapper">
