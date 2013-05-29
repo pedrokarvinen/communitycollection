@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523084748) do
+ActiveRecord::Schema.define(:version => 20130523085246) do
+
+  create_table "articles", :force => true do |t|
+    t.integer  "initiative_id"
+    t.string   "title"
+    t.string   "slug"
+    t.text     "body"
+    t.string   "thumbnail"
+    t.text     "splash"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "articles", ["initiative_id"], :name => "index_articles_on_initiative_id"
 
   create_table "brands", :force => true do |t|
     t.string   "name"
