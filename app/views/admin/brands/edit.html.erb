@@ -24,6 +24,12 @@
 	    </div>
 	  </div>
 	  <div class="control-group">
+	    <label class="control-label" for="name">Slug</label>
+	    <div class="controls">
+	      <input id="brand-slug" type="text" class="input-xlarge" name="brand[slug]" value="<%= @brand.slug %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
 	    <label class="control-label" for="about">About</label>
 	    <div class="controls">
 	      <textarea name="brand[about]" class="input-xlarge" rows="6"><%= @brand.about %></textarea>

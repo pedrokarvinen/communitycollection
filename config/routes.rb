@@ -1,28 +1,28 @@
 Communitycollection::Application.routes.draw do
   
   #actions in admin/brands controller
-  get "admin/brands/index"
-  get "admin/brands/new"
-  get "admin/brands/edit"
-  post "admin/brands/create"
-  post "admin/brands/update"
-  get "admin/brands/delete"
+  get "brands/index"
+  get "brands/new"
+  get "brands/edit"
+  post "brands/create"
+  post "brands/update"
+  get "brands/delete"
   
   #actions in admin/initiatives controller
-  get "admin/initiatives/index"
-  get "admin/initiatives/new"
-  get "admin/initiatives/edit"
-  post "admin/initiatives/create"
-  post "admin/initiatives/update"
-  get "admin/initiatives/delete"
+  get "initiatives/index"
+  get "initiatives/new"
+  get "initiatives/edit"
+  post "initiatives/create"
+  post "initiatives/update"
+  get "initiatives/delete"
   
   #actions in admin/articles controller
-  get "admin/articles/index"
-  get "admin/articles/new"
-  get "admin/articles/edit"
-  post "admin/articles/create"
-  post "admin/articles/update"
-  get "admin/articles/delete"
+  get "articles/index"
+  get "articles/new"
+  get "articles/edit"
+  post "articles/create"
+  post "articles/update"
+  get "articles/delete"
 
   #actions in shop controller
   get "shop/index"
@@ -52,6 +52,7 @@ Communitycollection::Application.routes.draw do
   #routes for brands in admin
   match 'admin' => 'admin/brands#index';
   match 'admin/brands' => 'admin/brands#index';
+  match 'admin/brands/new' => 'admin/brands#new';
   match 'admin/brands/create' => 'admin/brands#create';
   match 'admin/brands/:id' => 'admin/brands#edit';
   match 'admin/brands/delete/:id' => 'admin/brands#delete';

@@ -22,6 +22,12 @@
 	    </div>
 	  </div>
 	  <div class="control-group">
+	    <label class="control-label" for="name">Slug</label>
+	    <div class="controls">
+	      <input id="article-slug" type="text" class="input-xlarge" name="article[slug]" value="<%= @article.slug %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
 	    <label class="control-label" for="article[body]">Body</label>
 	    <div class="controls">
 	      <textarea name="article[body]" class="input-xlarge" rows="6"><%= @article.body%></textarea>
