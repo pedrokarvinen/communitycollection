@@ -6,26 +6,30 @@
     <a href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/new" class="btn btn-primary">New Article</a>
   </div>
 </div>
-<table class="index table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th class="actions"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><a href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/<%= article.id %>"><%= article.title %></a></td>
-        <td>
-          <a class="btn btn-mini" target="_blank" href="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>/publication/<%= article.slug %>">view</a>
-          <a class="btn btn-mini" href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/<%= article.id %>">edit</a>
-          <form action="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/delete/<%= article.id %>"  method="post" class="form-inline" onsubmit="return confirm('Are you sure you wish to delete this initiative?');">
-            <input type="hidden" name="_method" value="delete">
-            <input class="btn btn-mini btn-danger" type="submit" value="delete">
-          </form>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @articles %>
+	<table class="index table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Title</th>
+	      <th class="actions"></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @articles.each do |article| %>
+	      <tr>
+	        <td><a href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/<%= article.id %>"><%= article.title %></a></td>
+	        <td>
+	          <a class="btn btn-mini" target="_blank" href="/discover/by-brand/<%= @brand.slug %>/<%= @initiative.slug %>/publication/<%= article.slug %>">view</a>
+	          <a class="btn btn-mini" href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/<%= article.id %>">edit</a>
+	          <form action="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles/delete/<%= article.id %>"  method="post" class="form-inline" onsubmit="return confirm('Are you sure you wish to delete this initiative?');">
+	            <input type="hidden" name="_method" value="delete">
+	            <input class="btn btn-mini btn-danger" type="submit" value="delete">
+	          </form>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% else %>
+	<p>No articles here!</p>
+<% end %>
