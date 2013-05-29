@@ -61,5 +61,6 @@ module Communitycollection
     config.assets.version = '1.0'
     
     config.assets.precompile += %w( bootstrap.css )
+    config.assets.precompile += %w( bootstrap.js )
   end
 end
