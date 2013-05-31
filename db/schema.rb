@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523085246) do
+ActiveRecord::Schema.define(:version => 20130530203311) do
 
   create_table "articles", :force => true do |t|
     t.integer  "initiative_id"
@@ -33,6 +33,29 @@ ActiveRecord::Schema.define(:version => 20130523085246) do
     t.datetime "updated_at"
   end
 
+  create_table "categories", :force => true do |t|
+    t.string   "cat_id"
+    t.string   "name"
+    t.string   "kind"
+    t.string   "genre"
+    t.integer  "brand_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "parent_id"
+  end
+
+  add_index "categories", ["brand_id"], :name => "index_categories_on_brand_id"
+
+  create_table "images", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "image_path"
+    t.string   "thumb_path"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "images", ["product_id"], :name => "index_images_on_product_id"
+
   create_table "initiatives", :force => true do |t|
     t.integer  "brand_id"
     t.string   "name"
@@ -45,5 +68,25 @@ ActiveRecord::Schema.define(:version => 20130523085246) do
   end
 
   add_index "initiatives", ["brand_id"], :name => "index_initiatives_on_brand_id"
+
+  create_table "products", :force => true do |t|
+    t.integer  "brand_id"
+    t.string   "prod_id"
+    t.string   "name"
+    t.string   "color"
+    t.float   "price"
+    t.text     "description"
+    t.string   "genre"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "products", ["brand_id"], :name => "index_products_on_brand_id"
+  
+  create_table :categories_products, :id => false do |t|
+      t.references :product
+      t.references :category
+  end
+  add_index :categories_products, [:product_id, :category_id]
 
 end

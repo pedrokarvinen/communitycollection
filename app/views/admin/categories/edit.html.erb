@@ -1,0 +1,74 @@
+<h1>Edit initiative</h1>
+<form class="form-horizontal" enctype="multipart/form-data" action="/admin/brands/<%= @brand.id %>/categories/update/<%= @category.id %>" method="post">
+	<% unless @category.errors.blank? %>
+	  <div class="alert">
+	    <button class="close" data-dismiss="alert">×</button>
+	    <strong>Warning!</strong> The category could not be saved because of the following errors:
+	    <ul>
+	      <% @category.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	
+	<input id="category-id" type="hidden" class="input-xlarge" name="category[id]" value="<%= @category.id %>">
+	<fieldset>
+		<div class="control-group">
+	    <label class="control-label" for="category[cat_id]">Real Category ID</label>
+	    <div class="controls">
+	      <input type="text" class="input-xlarge" name="category[cat_id]" value="<%= @category.cat_id %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="category[name]">Name</label>
+	    <div class="controls">
+	      <input type="text" class="input-xlarge" name="category[name]" value="<%= @category.name %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="name">Kind <br/> (category or collection)</label>
+	    <div class="controls">
+	      <select id="category-kind" class="input-xlarge" name="category[kind]">
+	      	<option value="category" <%= 'selected' if @category.kind == 'category' %>>Category</option>
+	      	<option value="collection" <%= 'selected' if @category.kind == 'collection' %>>Collection</option>
+	      </select>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="category[genre]">Genre</label>
+	    <div class="controls">
+	      <select id="category-genre" class="input-xlarge" name="category[genre]">
+	      	<option value="men" <%= 'selected' if @category.genre == 'men' %>>Men</option>
+	      	<option value="women" <%= 'selected' if @category.genre == 'women' %>>Women</option>
+	      </select>
+	    </div>
+	  </div>
+	  
+	  <div class="control-group">
+	    <label class="control-label" for="category[parent_id]">Parent ID</label>
+	    <div class="controls">
+	      <select id="category-parent" class="input-xlarge" name="category[parent_id]">
+	      	<option value="0">No Parent</option>
+	   	<% 
+	   	if @categories
+	   		@categories.each do |cat|
+	   			if cat['parent_id'] == 0 && cat['id'] != @category.id
+	   	%>
+	      	<option value="<%= cat['id'] %>" <%= 'selected' if @category.parent_id == cat['id'] %>><%= cat['name'] + '(' + cat['genre'] + ')' %></option>
+	    <%
+	    		end
+	    	end
+	    end
+	    %>
+	      </select>
+	    </div>
+	  </div>
+	  
+	</fieldset>
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save changes</button>
+	  <a href="/admin/brands/<%= @brand.id %>/categories" class="btn">Cancel</a>
+	</div>
+
+</form>

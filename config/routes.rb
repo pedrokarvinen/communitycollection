@@ -1,42 +1,55 @@
 Communitycollection::Application.routes.draw do
   
   #actions in admin/brands controller
-  get "brands/index"
-  get "brands/new"
-  get "brands/edit"
-  post "brands/create"
-  post "brands/update"
-  get "brands/delete"
+  get "brands/index";
+  get "brands/new";
+  get "brands/edit";
+  post "brands/create";
+  post "brands/update";
+  get "brands/delete";
+  
+  #actions in admin/categories controller
+  get "categories/index";
+  get "categories/new";
+  get "categories/edit";
+  post "categories/create";
+  post "categories/update";
+  get "categories/delete";
   
   #actions in admin/initiatives controller
-  get "initiatives/index"
-  get "initiatives/new"
-  get "initiatives/edit"
-  post "initiatives/create"
-  post "initiatives/update"
-  get "initiatives/delete"
+  get "initiatives/index";
+  get "initiatives/new";
+  get "initiatives/edit";
+  post "initiatives/create";
+  post "initiatives/update";
+  get "initiatives/delete";
   
   #actions in admin/articles controller
-  get "articles/index"
-  get "articles/new"
-  get "articles/edit"
-  post "articles/create"
-  post "articles/update"
-  get "articles/delete"
+  get "articles/index";
+  get "articles/new";
+  get "articles/edit";
+  post "articles/create";
+  post "articles/update";
+  get "articles/delete";
 
   #actions in shop controller
-  get "shop/index"
-  get "shop/brands"
+  get "shop/index";
+  get "shop/brands";
   
   #actions in discover controller
-  get "discover/index"
-  get "discover/bybrand"
-  get "discover/byinitiative"
-  get "discover/brand"
-  get "discover/initiative"
-  get "discover/article"
+  get "discover/index";
+  get "discover/bybrand";
+  get "discover/byinitiative";
+  get "discover/brand";
+  get "discover/initiative";
+  get "discover/article";
   
-  root :to => 'shop#index'
+  #actions in scrap controller
+  get "scrap/index"
+  get "scrap/levis"
+  post "scrap/levis"
+  
+  root :to => 'shop#index';
   
   #routes for shop in front end
   match 'shop' => 'shop#index';
@@ -49,6 +62,11 @@ Communitycollection::Application.routes.draw do
   match 'discover/by-brand/:brand/:initiative' => 'discover#initiative';
   match 'discover/by-brand/:brand/:initiative/publication/:article' => 'discover#article';
   
+  
+  #routes for scrap in admin
+  match 'admin/scrap' => 'admin/scrap#index';
+  match 'admin/scrap/levis' => 'admin/scrap#levis';
+  
   #routes for brands in admin
   match 'admin' => 'admin/brands#index';
   match 'admin/brands' => 'admin/brands#index';
@@ -57,6 +75,14 @@ Communitycollection::Application.routes.draw do
   match 'admin/brands/:id' => 'admin/brands#edit';
   match 'admin/brands/delete/:id' => 'admin/brands#delete';
   match 'admin/brands/update/:id' => 'admin/brands#update';
+  
+  #routes for categories in admin
+  match 'admin/brands/:brand_id/categories' => 'admin/categories#index';
+  match 'admin/brands/:brand_id/categories/new' => 'admin/categories#new';
+  match 'admin/brands/:brand_id/categories/create' => 'admin/categories#create';
+  match 'admin/brands/:brand_id/categories/:id' => 'admin/categories#edit';
+  match 'admin/brands/:brand_id/categories/update/:id' => 'admin/categories#update';
+  match 'admin/brands/:brand_id/categories/delete/:id' => 'admin/categories#delete';
   
   #routes for initiatives in admin
   match 'admin/brands/:brand_id/initiatives' => 'admin/initiatives#index';

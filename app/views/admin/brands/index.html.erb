@@ -21,6 +21,7 @@
       <td><a href="/admin/brands/<%= brand.id %>"><%= brand.name%></a></td>
         <td>
           <a class="btn btn-mini" target="_blank" href="/discover/by-brand/<%= brand.slug %>">view</a>
+          <a class="btn btn-mini" href="/admin/brands/<%= brand.id %>/categories">categories</a>
           <a class="btn btn-mini" href="/admin/brands/<%= brand.id %>/initiatives">initiatives</a>
           <a class="btn btn-mini" href="/admin/brands/<%= brand.id %>">edit</a>
           <form action="/admin/brands/delete/<%= brand.id %>"  method="post" class="form-inline" onsubmit="return confirm('Are you sure you wish to delete this brand?');">

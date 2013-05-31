@@ -1,0 +1,23 @@
+<h1>New Brand</h1>
+<form class="form-horizontal" enctype="multipart/form-data" action="/admin/scrap/levis" method="post">
+	<fieldset>
+		<input type="hidden" name="brand_slug" value="levis">
+	  <div class="control-group">
+	    <label class="control-label" for="name">Product Family URL</label>
+	    <div class="controls">
+	      <input id="family-url" type="text" class="input-xlarge" name="family_url" value="<%= @site_url + @family_path %>">
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="name">Product Detail URL</label>
+	    <div class="controls">
+	      <input id="product-url" type="text" class="input-xlarge" name="product_url" value="http://us.levi.com/product/index.jsp">
+	    </div>
+	  </div>
+	  
+	</fieldset>
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary" name="submit">Scrap</button>
+	</div>
+
+</form>

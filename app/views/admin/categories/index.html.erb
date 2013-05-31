@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="span9">
+    <h1>Initiatives</h1>
+  </div>
+  <div class="span3 link-new">
+    <a href="/admin/brands/<%= @brand.id %>/categories/new" class="btn btn-primary">New Category</a>
+  </div>
+</div>
+
+<% if @categories %>
+	<table class="index table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Title</th>
+	      <th class="actions"></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @categories.each do |category| %>
+	      <tr>
+	        <td><a href="/admin/brands/<%= @brand.id %>/categories/<%= category.id %>"><%= category.name%></a></td>
+	        <td>
+	          <a class="btn btn-mini" href="/admin/brands/<%= @brand.id %>/categories/<%= category.id %>">edit</a>
+	          <form action="/admin/brands/<%= @brand.id %>/categories/delete/<%= category.id %>"  method="post" class="form-inline" onsubmit="return confirm('Are you sure you wish to delete this category?');">
+	            <input type="hidden" name="_method" value="delete">
+	            <input class="btn btn-mini btn-danger" type="submit" value="delete">
+	          </form>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% else %>
+	<p>No categories now!</p>
+<% end %>

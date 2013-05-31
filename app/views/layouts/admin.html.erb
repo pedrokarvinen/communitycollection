@@ -53,6 +53,14 @@
               	<li class="<%= 'active' if controller.controller_name == 'articles' %>"><a href="/admin/brands/<%= @brand.id %>/initiatives/<%= @initiative.id %>/articles">Articles</a></li>
               <% end %>
               
+              <li class="dropdown <%= 'active' if controller.controller_name == 'scrap' %>">
+              	<a href="#" data-toggle="dropdown">Scrap</a>
+              	<ul class="dropdown-menu">
+              		<li><a href="/admin/scrap/levis">Levis</a></li>
+              		<li><a href="/admin/scrap/polo">Polo</a></li>
+              	</ul>
+              </li>
+              
             </ul>
           </div>
         </div>
