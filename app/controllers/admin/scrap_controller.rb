@@ -41,13 +41,16 @@ class Admin::ScrapController < ApplicationController
           prod_id = p.css('a.main-img').attr('href').text.gsub(@product_path + '?productId=', '').gsub('view=all', '').gsub('&', '')
           name = p.css('h3 a').text;
           color = p.css('a.colorName').text
-          price = p.css('a.price span').text.gsub('$', '')
           
-          
+          if p.css('a.price span.ours')
+            price = p.css('a.price span.ours span').text.gsub(' $', '')
+          else
+            price = p.css('a.price span').text.gsub('$', '')    
+          end
           
           #insert new product
           if product = Product.find(:first, :conditions => "prod_id='#{prod_id}'")
-            product.category.push(category)
+            product.categories.push(category)
             product.save            
           else
             product_doc = Nokogiri::HTML(open(product_url + '?productId=' + prod_id))
@@ -74,7 +77,7 @@ class Admin::ScrapController < ApplicationController
             product = Product.new(prod_info)
             product.brand = brand
             
-            product.category.push(category)
+            product.categories.push(category)
             
             if product.save
               

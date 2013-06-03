@@ -16,6 +16,7 @@
       
       $('.quick-filters .root').show();
       $('.product-type .root').show();
+      $('.collections .root').show();
       
 
       $('body').addClass('shop');
@@ -167,14 +168,8 @@
 	            height: 'toggle'
 	          },1000, 'easeInOutQuint');
 	          
-	          if( items_row.find('.quarter_column h5').is(':visible') == false ){
-	          	items_row.find('.quarter-column').find('h5').animate({
-		            height: 'toggle'
-		          },1000, 'easeInOutQuint');
-		          items_row.find('.quarter-column').find('h4').animate({
-		            height: 'toggle'
-		          },1000, 'easeInOutQuint');
-		          items_row.find('.quarter-column').find('h3').animate({
+	          if( items_row.find('.quarter-column .shop-item-wrapper a div').is(':visible') == false ){
+	          	items_row.find('.quarter-column .shop-item-wrapper a div').animate({
 		            height: 'toggle'
 		          },1000, 'easeInOutQuint');
 	          }
@@ -203,14 +198,8 @@
 	            height: 'toggle'
 	          },1000, 'easeInOutQuint');
 	          
-	          if( items_row.find('.quarter_column h5').is(':visible') == false ){
-	          	items_row.find('.quarter-column').find('h5').animate({
-		            height: 'toggle'
-		          },1000, 'easeInOutQuint');
-		          items_row.find('.quarter-column').find('h4').animate({
-		            height: 'toggle'
-		          },1000, 'easeInOutQuint');
-		          items_row.find('.quarter-column').find('h3').animate({
+	          if( items_row.find('.quarter-column .shop-item-wrapper a div').is(':visible') == true ){
+	          	items_row.find('.quarter-column .shop-item-wrapper a div').animate({
 		            height: 'toggle'
 		          },1000, 'easeInOutQuint');
 	          }
@@ -236,8 +225,21 @@
             height: 'toggle'
           },1000, 'easeInOutQuint');
           
-          $(this).parent().parent().children().find('.extended').toggleClass('extended');
+          //$(this).parent().parent().children().find('.extended').toggleClass('extended');
+          items_row = $(this).parent().parent();
+          
+          if( items_row.find('.quarter-column .shop-item-wrapper a div').is(':visible') == false ){
+          	items_row.find('.quarter-column .shop-item-wrapper a div').animate({
+	            height: 'toggle'
+	          },1000, 'easeInOutQuint');
+          }
         });
+        
+        // thumbnail view
+        $('.item-thumb-wrapper').on('click', function(e){
+        	var image_path = $(this).find('img').data('main');
+        	$(this).parent().prev().find('img').attr('src', image_path);
+        })
       }();
       
 
@@ -278,9 +280,9 @@
 
 <div class="grid_24 alpha omega page-navigation">
   <ul>
-    <li><a href="/shop" class="selected">latest</a><span>&nbsp;</span></li>
-    <li><a href="#">women</a><span>&nbsp;</span></li>
-    <li><a href="#">men</a><span>&nbsp;</span></li>
+    <li><a href="/shop" class="<%='selected' if @genre=='all' %>">latest</a><span>&nbsp;</span></li>
+    <li><a href="/shop/women" class="<%='selected' if @genre=='women' %>">women</a><span>&nbsp;</span></li>
+    <li><a href="/shop/men" class="<%='selected' if @genre=='men' %>">men</a><span>&nbsp;</span></li>
     <li><a href="#">editorial</a><span>&nbsp;</span></li>
     <li><a href="/shop/brands">brands</a></li>
   </ul>
@@ -313,6 +315,7 @@
 
   </div>
   <!-- shop-slider end -->
+  
 
   <div id="flexible-grid" class="container_24 clearfix">
 
@@ -355,9 +358,9 @@
       			<li class="dropdown-submenu">
       				<a href="#"><b>GENRE</b></a>
       				<ul class="dropdown-menu">
-      					<li><a href="#">ALL</a></li>
-      					<li><a href="#">MEN</a></li>
-      					<li><a href="#">WOMEN</a></li>
+      					<li><a href="/shop" class="<%= 'active' if @genre == 'all' %>">ALL</a></li>
+      					<li><a href="/shop/men" class="<%= 'active' if @genre == 'men' %>">MEN</a></li>
+      					<li><a href="/shop/women" class="<%= 'active' if @genre == 'women' %>">WOMEN</a></li>
       				</ul>
       			</li>
       			<li class="dropdown-submenu">
@@ -375,96 +378,97 @@
       	
       	<!-- product-type section start -->
       	<div class="product-type section">
-      		
+    		<% 
+    		if @categories
+    		%>
       		<div class="title">
       			<a href="#">PRODUCT TYPE</a>
       		</div>
       		
       		<ul class="dropdown-menu root">
-      			<li class="dropdown-submenu">
+      		<% 
+      			@categories.each do |item|
+      		%>
+      			<li>
+      				<a href="?category=<%= item[:cat].id.to_s %>" class="<%='active' if @category == item[:cat].id.to_s %>">
+      					<%=item[:cat].name.upcase %>
+      				<%
+      				if @genre == "all"
+      				%> 
+      					(<%=item[:cat].genre.upcase %>)
+      				<%
+      				end
+      				%>
+      				</a>
+      				<ul class="dropdown-menu">
+      			<% 
+      				if item[:subcats]
+      					item[:subcats].each do |subcat|
+      			%>
+      					<li><a href="?category=<%= subcat.id %>" class="<%='active' if @category == subcat.id.to_s %>"><%= subcat.name.upcase %></a></li>
+      			<%
+      				end
+      			end%>
+      				</ul>
+      			</li>
+      		<%
+      			end	
+      		%>
+      		</ul>
+    		<%	
+    		end
+    		%>
+    		</div>
+      			<!--<li class="dropdown-submenu">
       				<a href="#">CASUAL</a>
       				<ul class="dropdown-menu">
       					<li><a href="#">CASUAL JACKETS</a></li>
       					<li><a href="#">CASUAL TROUSERS</a></li>
       				</ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">IPAD CASES</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">JEANS</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">KEYRINGS</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">KNITWEAR</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">PHONE ACCESSORIES</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">SCARVES</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">SHIRTS</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">TSHIRTS</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">WALLETS</a>
-      				<ul class="dropdown-menu"></ul>
-      			</li>
-      		</ul>
-      
-      	</div>
+      			</li>-->
+      		
       	<!-- product-type section end -->
       	
       	<!-- collections section start -->
       	<div class="collections section">
       		
+    		<% 
+    		if @collections
+    		%>
       		<div class="title">
       			<a href="#">COLLECTIONS</a>
       		</div>
       		
       		<ul class="dropdown-menu root">
-      			<li class="dropdown-submenu">
-      				<a href="#">LEVIS</a>
+      		<% 
+      			@collections.each do |item|
+      		%>
+      			<li>
+      				<a href="?category=<%= item[:col].id %>" class="<%='active' if @category == item[:col].id.to_s %>"><%=item[:col].name.upcase %></a>
       				<ul class="dropdown-menu">
-      					<li><a href="#">LEVI'S COMMUTER</a></li>
-      					<li><a href="#">FRIENDS OF MOCA</a></li>
-      					<li><a href="#">LEVI'S X FILSON</a></li>
-      					<li><a href="#">LINE 8</a></li>
-      					<li><a href="#">MADE IN USA</a></li>
-      					<li><a href="#">WATER LESS</a></li>
+      			<% 
+      				if item[:subcols]
+      					item[:subcols].each do |subcol|
+      			%>
+      					<li><a href="?category=<%= subcol.id %>" class="<%='active' if @category == subcol.id.to_s %>"><%= subcol.name.upcase %></a></li>
+      			<%
+      				end
+      			end%>
       				</ul>
       			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">EDUN</a>
-      				<ul class="dropdown-menu">
-      				</ul>
-      			</li>
-      			<li class="dropdown-submenu">
-      				<a href="#">INDUSTRY OF ALL NATIONS</a>
-      				<ul class="dropdown-menu">
-      				</ul>
-      			</li>
+      		<%
+      			end	
+      		%>
       		</ul>
+    		<%	
+    		end
+    		%>
       
       	</div>
       	<!-- collections section end -->
       	
       	<!-- price section start -->
-      	<div class="price section">
+      	<!--<div class="price section">
       		
       		<div class="title">
       			<a href="#">PRICE</a>
@@ -494,11 +498,11 @@
       			</li>
       		</ul>
       
-      	</div>
+      	</div>-->
       	<!-- price section end -->
       	
       	<!-- color section start -->
-      	<div class="color section">
+      	<!--<div class="color section">
       		
       		<div class="title">
       			<a href="#">COLOR</a>
@@ -528,11 +532,11 @@
       			</li>
       		</ul>
       
-      	</div>
+      	</div>-->
       	<!-- color section end -->
       	
       	<!-- size section start -->
-      	<div class="size section">
+      	<!--<div class="size section">
       		
       		<div class="title">
       			<a href="#">SIZE</a>
@@ -562,7 +566,7 @@
       			</li>
       		</ul>
       
-      	</div>
+      	</div>-->
       	<!-- size section end -->
       	
       	
@@ -573,411 +577,98 @@
     <!--filter end -->
 
 
-	<div class="items-wrapper">
-	    <div class="items-row clearfix">
+		<div class="items-wrapper">
+		<%
+		if @products
+			i = 0
+			item_html = ''
+			desc_html = ''
+			thumb_html = ''
+			main_image_path = ''
+			@products.each do |p|
+				i = i+1
+				
+				p.images.each do |img|
+					html = ''
+		    	html += '		<div class="item-thumb-wrapper">'
+		    	html += '			<img src="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
+		    	html += '		</div>'
+		    	thumb_html = html + thumb_html
+		    	main_image_path = img.image_path
+	      end
 	      
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description1">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item1.jpg" alt="">
-	            <h5>levis</h5>
-	            <h4>jacket sierra tone</h4>
-	            <h3>U$S 35</h3>
-	          </a>
-	        </div>  
-	      </div>
+				item_html += '<div class="quarter-column condenseds">'
+	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
+	      item_html += '		<div class="triangle"></div>'
+	      item_html += '   	<a href="#">'
+	      item_html += '	      <img src="' + main_image_path + '" alt="">'
+	      item_html += '				<div>'			
+	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
+	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
+	      item_html += '		      <h3>US$ ' + p.price.to_s + '</h3>'
+	      item_html += '				</div>'	
+	      item_html += '	    </a>'
+	      item_html += '	  </div>' 
+	      item_html += '</div>'
 	      
-	
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description2">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item2.jpg" alt="">
-	            <h5>industry of all nations</h5>
-	            <h4>apartton</h4>
-	            <h3>U$S 58</h3>
-	          </a>
-	        </div>  
-	      </div>
 	      
-	     
+	      desc_html += '<div class="item-description description' + p.id.to_s + '">'
+	      desc_html += '	<div class="close-icon">'
+	      desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
+	      desc_html += '	</div>'
+		    desc_html += '	<div class="image-wrapper">'
+		    desc_html += '		<img src="' + main_image_path + '" alt="">'
+		    desc_html += '	</div>'
+		    
+		    desc_html += '	<div class="thumbs-wrapper">'
+		    
+		   	desc_html += thumb_html
+		    thumb_html = ''
+		 
+		    desc_html += '	</div>'
+		    desc_html += '	<div class="description-wrapper">'
+		    desc_html += '		<h3>' + p.brand.name + '</h3>'
+		    desc_html += '		<h4>' + p.name + '</h4>'
+		    desc_html += '		<p>' + p.description + '</p>'
+		    desc_html += '		<div class="price">US$' + p.price.to_s + '</div>'
+		    		
+		    desc_html += '		<a href= "http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '" class="purchase-button" target="_blank">PURCHASE from levi.com</a>'
+		    desc_html += '		<div class="other-buttons">'
+		    desc_html += '			<a href="#">ADD TO WISH LIST</a>'
+		    desc_html += '			<a href="#" class="last">SHARE THIS ITEM</a>'
+		    desc_html += '		</div>'
+		    		
+		    desc_html += '	</div>'
+	    	
+	      desc_html += ' </div>'
 	      
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description3">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item3.jpg" alt="">
-	            <h5>industry of all nations</h5>
-	            <h4>go green</h4>
-	            <h3>U$S 76</h3>
-	          </a>
-	        </div>  
-	      </div>
-	      
-	      <!-- item description start -->
-	      <div class="item-description description1">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item1.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item1.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item1.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item1.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Levis</h3>
-		    		<h4>Jacket Sierra Tone</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$35</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	      <!-- item description start -->
-	      <div class="item-description description2">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item2.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item2.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item2.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item2.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Apartton</h3>
-		    		<h4>Industry of All Nations</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$58</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	      <!-- item description start -->
-	      <div class="item-description description3">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item3.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item3.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item3.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item3.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Go Green</h3>
-		    		<h4>Industry of All Nations</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$76</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	
-	    </div>
-	    <!-- items-row end -->
-	
-			<!-- items-row start -->
-	    <div class="items-row clearfix">
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description4">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item4.jpg" alt="">
-	            <h5>levis</h5>
-	            <h4>sandstorm</h4>
-	            <h3>U$S 48</h3>
-	          </a>
-	        </div>  
-	      </div>
-	
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description5">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item5.jpg" alt="">
-	            <h5>edun</h5>
-	            <h4>amaquera</h4>
-	            <h3>U$S 119</h3>
-	          </a>
-	        </div>  
-	      </div>
-	
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description6">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item6.jpg" alt="">
-	            <h5>patagonia</h5>
-	            <h4>chaquetone</h4>
-	            <h3>U$S 224</h3>
-	          </a>
-	        </div>  
-	      </div>
-	      
-	      <!-- item description start -->
-	      <div class="item-description description4">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item4.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item4.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item4.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item4.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Levis</h3>
-		    		<h4>Sandstorm</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$48</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	      <!-- item description start -->
-	      <div class="item-description description5">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item5.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item5.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item5.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item5.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Edun</h3>
-		    		<h4>Industry of All Nations</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$119</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	      <!-- item description start -->
-	      <div class="item-description description6">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item6.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item6.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item6.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item6.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Patagonia</h3>
-		    		<h4>Amaquera</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$224</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	       
-	    </div>
-	    <!-- items-row end -->
-
-	
-			<!-- items-row start -->
-	    <div class="items-row clearfix">
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description7">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item7.jpg" alt="">
-	            <h5>alternative</h5>
-	            <h4>lowride</h4>
-	            <h3>U$S 78</h3>
-	          </a>
-	        </div>  
-	      </div>
-	
-	      <div class="quarter-column condenseds">
-	        <div class="shop-item-wrapper" data-target="description8">
-	          <div class="triangle"></div>
-	          <a href="#">
-	            <img src="/assets/shop/items/item8.jpg" alt="">
-	            <h5>black apple</h5>
-	            <h4>mamma</h4>
-	            <h3>U$S 58</h3>
-	          </a>
-	        </div>  
-	      </div>
-	      
-	      <!-- item description start -->
-	      <div class="item-description description7">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item7.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item7.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item7.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item7.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Alternative</h3>
-		    		<h4>Lowride</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$78</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	      <!-- item description start -->
-	      <div class="item-description description8">
-	      	<div class="close-icon">
-	      		<a href="#"><img src="/assets/icons/close.png"></a>
-	      	</div>
-		    	<div class="image-wrapper">
-		    		<img src="/assets/shop/items/item8.jpg" alt="">
-		    	</div>
-		    	<div class="thumbs-wrapper">
-		    		<div class="item-thumb-wrapper">
-		    			<img src="/assets/shop/items/item8.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item8.jpg" alt="">
-		    		</div>
-		    		<div class="thumb-wrapper">
-		    			<img src="/assets/shop/items/item8.jpg" alt="">
-		    		</div>
-		    	</div>
-		    	<div class="description-wrapper">
-		    		<h3>Black Apple</h3>
-		    		<h4>Mamma</h4>
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo fugiat laborum ullam eveniet impedit consequuntur in voluptatibus incidunt. </p>
-		    		<div class="price">U$58</div>
-		    		
-		    		<a href= "#" class="purchase-button">PURCHASE from levi.com</a>
-		    		<div class="other-buttons">
-		    			<a href="#">ADD TO WISH LIST</a>
-		    			<a href="#" class="last">SHARE THIS ITEM</a>
-		    		</div>
-		    		
-		    	</div>
-	    	
-	       </div>
-	       <!--item description end -->
-	       
-	    </div>
-	    <!-- items-row end -->
-	
-	    <div class="item-description"></div>
-	    
-	    <div style="clear: both;"></div>
-	</div>
-  </div>
+	      if i == 3
+					i = 0
+		%>
+					<div class="items-row clearfix">
+						<%= raw item_html %>
+						<%= raw desc_html %>
+					</div>	
+		<%
+					item_html = ''
+					desc_html = ''			
+				end
+			end
+			
+			if i != 3
+		%>
+			<%= raw item_html %>
+			<%= raw desc_html %>
+		<%
+			end
+		%>
+		<%
+		end
+		%>
+  	</div>
   
   
 <% end %>
+
+<div style="clear: both;"></div>
 

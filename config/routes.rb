@@ -53,6 +53,8 @@ Communitycollection::Application.routes.draw do
   
   #routes for shop in front end
   match 'shop' => 'shop#index';
+  match 'shop/:genre' => 'shop#index';
+  match 'shop/:genre/:brand' => 'shop#index';
   
   #routes for discover in front end
   match 'discover' => 'discover#index';

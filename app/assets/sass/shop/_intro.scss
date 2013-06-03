@@ -352,6 +352,12 @@ body.shop #main-menu {
                 font-family: "regular", sans-serif;
                 font-size: 14px;
                 
+                &.active{
+                  color: $base_yellow;
+                  font-style: italic;
+                  font-family: "semibold", sans-serif;
+                }
+                
                 b{
                   font-family: "bold", sans-serif;
                 }
@@ -377,7 +383,7 @@ body.shop #main-menu {
       position:relative;
       width: 238px;
       margin: 0 auto;
-      /*height: 370px;*/
+
       overflow:hidden;
       background: $triangle_color;
       text-transform: uppercase;
@@ -408,6 +414,10 @@ body.shop #main-menu {
 
         &:hover {
           @include opacity(.7);
+        }
+        
+        div{
+          height: 60px;
         }
         
       }
@@ -493,7 +503,7 @@ body.shop #main-menu {
       padding-right: 20px;
       img{
         width: 60px;
-        height: 80px;
+        height: 76px;
         border: 0;
         
       }
