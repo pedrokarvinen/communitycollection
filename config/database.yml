@@ -29,19 +29,19 @@ test:
 
 
 production:
-  #adapter: postgresql
-  #encoding: unicode
-  #host: ec2-23-21-129-125.compute-1.amazonaws.com
-  #database: d766ojpa13g3a6
-  #username: aydkwxechudxoq
-  #password: SSEJP8uGo60OVV3le0ZKUvQapF
-  #pool: 5
-  #timeout: 5000
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  database: cc
-  username: postgres
-  password: root
+  host: ec2-23-21-129-125.compute-1.amazonaws.com
+  database: d766ojpa13g3a6
+  username: aydkwxechudxoq
+  password: SSEJP8uGo60OVV3le0ZKUvQapF
   pool: 5
   timeout: 5000
+  #adapter: postgresql
+  #encoding: unicode
+  #host: localhost
+  #database: cc
+  #username: postgres
+  #password: root
+  #pool: 5
+  #timeout: 5000
