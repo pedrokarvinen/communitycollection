@@ -42,7 +42,8 @@ class Admin::ScrapController < ApplicationController
           name = p.css('h3 a').text;
           color = p.css('a.colorName').text
           
-          if p.css('a.price span.ours')
+          price = ''
+          if p.css('a.price span.ours span').text != ''
             price = p.css('a.price span.ours span').text.gsub(' $', '')
           else
             price = p.css('a.price span').text.gsub('$', '')    
