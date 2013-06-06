@@ -12,14 +12,7 @@
   
 </head>
 <body>
-
-	<%= yield :shop_header %>
-
-	<% if (request.path_info.include? "/discover") %> 
-		<div id="main-menu" class="discover">
-	<% else %>
-		<div id="main-menu" class="shop">
-	<% end %>		
+		<div id="main-menu" class="backend">
 			
 			<div class="container_24">	
 				<div class="grid_6 alpha">
@@ -40,26 +33,15 @@
 				<nav>
 					
 					<div class="grid_3 menu discover">
-
-						<% if (controller.controller_name.include? "discover") %> 
-							<a class="discover selected" href="/discover">Discover</a>	
-						<% else %>
-							<a class="discover" href="/discover">Discover</a>
-						<% end %>
-						
+							<a class="discover" href="/discover">Discover</a>		
 					</div>
 					
 					<div class="grid_3 menu shop">
-						<% if (controller.controller_name.include? "shop") %> 
-							<a class="shop selected" href="/shop">Shop</a>
-						<% else %>
 							<a class="shop" href="/shop">Shop</a>
-						<% end %>
-						
 					</div>
 					
 					<div class="grid_3 menu sign-in">
-						<a class="sign-in" href="/backend/dashboard">Sign In</a>
+						<a class="sign-out" href="/">Sign Out</a>
 					</div>	
 
 				</nav>
@@ -79,8 +61,6 @@
 			<%= yield %>
 
 		</div>
-
-		<%= yield :shop_main_slider %>
 		
 		<%= yield :after_scripts %>
 

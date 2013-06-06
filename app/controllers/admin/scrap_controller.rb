@@ -36,19 +36,19 @@ class Admin::ScrapController < ApplicationController
         family_doc = Nokogiri::HTML(open(family_url + '?view=all&categoryId=' + category.cat_id))
         products = family_doc.css('ol.products .product')
         
-        
         products.each do |p|
           prod_id = p.css('a.main-img').attr('href').text.gsub(@product_path + '?productId=', '').gsub('view=all', '').gsub('&', '')
           name = p.css('h3 a').text;
           color = p.css('a.colorName').text
           
           price = ''
-          if p.css('a.price span.ours span').text != ''
-            price = p.css('a.price span.ours span').text.gsub(' $', '')
+          if p.css('a.price span.ours span.familyPriceNumbers').text != ''
+            price = p.css('a.price span.ours span.familyPriceNumbers').text.gsub(' $', '')
           else
             price = p.css('a.price span').text.gsub('$', '')    
           end
-          
+
+          #if false
           #insert new product
           if product = Product.find(:first, :conditions => "prod_id='#{prod_id}'")
             product.categories.push(category)
@@ -92,6 +92,9 @@ class Admin::ScrapController < ApplicationController
 
             end
           end
+          
+          #end
+          
         end 
       end      
   

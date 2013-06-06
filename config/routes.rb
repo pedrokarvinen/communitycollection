@@ -44,12 +44,21 @@ Communitycollection::Application.routes.draw do
   get "discover/initiative";
   get "discover/article";
   
+  #actions in backend controller
+  get "backend/index"
+  get "backend/dashboard"
+  get "backend/community"
+  get "backend/message"
+  
   #actions in scrap controller
   get "scrap/index"
   get "scrap/levis"
   post "scrap/levis"
   
   root :to => 'shop#index';
+  
+  #routes for backend in front end
+  match 'backend' => 'backend#dashboard'
   
   #routes for shop in front end
   match 'shop' => 'shop#index';

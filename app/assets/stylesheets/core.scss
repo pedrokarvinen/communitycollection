@@ -22,6 +22,8 @@ $base_darkblue  : #107090;
 @import "../sass/shop/_intro";
 @import "../sass/shop/_brands";
 
+@import "../sass/backend/_dashboard";
+
 
 body {
   background: #fff;
@@ -412,4 +414,8 @@ body {
       }
     }
   }
+}
+
+.clear{
+  both: clear;
 }

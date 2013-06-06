@@ -602,7 +602,7 @@
 	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
 	      item_html += '		<div class="triangle"></div>'
 	      item_html += '   	<a href="#">'
-	      item_html += '	      <img src="' + main_image_path + '" alt="">'
+	      item_html += '	      <img src="' + p.images.last.image_path + '" alt="">'
 	      item_html += '				<div>'			
 	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
 	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
@@ -618,7 +618,7 @@
 	      desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
 	      desc_html += '	</div>'
 		    desc_html += '	<div class="image-wrapper">'
-		    desc_html += '		<img src="' + main_image_path + '" alt="">'
+		    desc_html += '		<img src="' + p.images.last.image_path + '" alt="">'
 		    desc_html += '	</div>'
 		    
 		    desc_html += '	<div class="thumbs-wrapper">'

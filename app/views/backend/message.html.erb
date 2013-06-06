@@ -1,0 +1,98 @@
+<% content_for :after_scripts do %>
+  
+  <style>
+  
+  </style>
+  <script>
+    $(function(){
+      CC.load_background("backend-background-gray-to-white.jpg"); 
+    });
+  </script>
+
+<% end %> 
+<div id="breadcrum" class="container_24">
+  <nav class="discover">
+    <a href="#">Dahboard</a> /
+    <a href="#" class="selected">Levis</a>
+  </nav>
+</div>
+
+<div id="dashboard-wrapper">
+	
+	<!--leftnav wrapper start-->
+	<div class="leftnav-wrapper">
+		<!--brand log start -->
+		<div class="brand-logo">
+			<img src="/assets/backend/levis-logo.png">
+		</div>
+		<!--brand log end-->
+		
+		<div class="leftnav">
+			<ul>
+				<li><a href="/backend">Dashboard</a></li>
+				<li><a href="/backend/community">View Community</a></li>
+				<li><a href="/backend/message" class="active">Message Group</a></li>
+				<li><a href="">Feature Product</a></li>
+				<li><a href="">Edit Brand Page</a></li>
+				<li><a href="">Add/Edit Inititatives</a></li>
+				<li><a href="">Settings</a></li>
+			</ul>
+		</div>
+		<div class="leftnav-bottom-border"></div>
+		
+	</div>
+	<!--leftnav wrapper ent-->
+	
+	<!--content wrapper start-->
+	<div class="content-wrapper" id="message-group">
+		<!--title wrapper start-->
+		<div class="title-wrapper">
+			<div class="icon"><img src="/assets/backend/icons/message-blue.png"></div>
+			<div class="text">Message Group</div>
+			
+		</div>
+		<!--title wrapper end-->
+		
+		<div class="row send-to">
+			<div class="label">TO:</div>
+			<div class="content"><a href="#">214 Selected Users</a></div>
+		</div>
+		
+		<div class="row">
+			<input type="text" name="subject" id="subject" placeholder="Message subject here">
+		</div>
+		
+		<div class="row content">
+			<div class="label">CONTENT</div>
+			<div class="icons">
+				<img src="/assets/backend/icons/editor-b.png">
+				<img src="/assets/backend/icons/editor-i.png">
+				<img src="/assets/backend/icons/editor-u.png">
+				<img src="/assets/backend/icons/editor-link.png" class="seperator">
+				<img src="/assets/backend/icons/editor-icon1.png">
+			</div>
+			<div class="message-wrapper">
+				<textarea id="message" placeholder="Message content here"></textarea>
+			</div>
+		</div>
+		
+		<div class="row buttons">
+			<div class="label attach">ATTACH</div>
+			<div class="attach-button"><img src="/assets/backend/buttons/image.png"></div>
+			<div class="attach-button"><img src="/assets/backend/buttons/video.png"></div>
+			<div class="label or">OR</div>
+			<div class="or-button"><img src="/assets/backend/buttons/event.png"></div>
+			<div class="or-button"><img src="/assets/backend/buttons/discount.png"></div>
+			<div class="or-button"><img src="/assets/backend/buttons/survey.png"></div>
+			<div class="or-button"><img src="/assets/backend/buttons/hangout.png"></div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="row send-message" align="right">
+			<img src="/assets/backend/buttons/send-message.png">
+		</div>
+		
+	</div>
+	<!--content wrapper end-->
+</div>
+

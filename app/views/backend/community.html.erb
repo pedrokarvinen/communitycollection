@@ -1,0 +1,285 @@
+<% content_for :after_scripts do %>
+  
+  <style>
+  
+  </style>
+  <script>
+    $(function(){
+      CC.load_background("backend-background-gray-to-white.jpg"); 
+      
+      $('.dropdown').on('click', function(){
+      	var submenu_id = $(this).data('toggle');
+      	$('#' + submenu_id).animate({
+          height: 'toggle'
+        },500, 'easeInOutQuint');
+      });
+    });
+  </script>
+
+<% end %> 
+<div id="breadcrum" class="container_24">
+  <nav class="discover">
+    <a href="#">Dahboard</a> /
+    <a href="#" class="selected">Levis</a>
+  </nav>
+</div>
+
+<div id="dashboard-wrapper">
+	
+	<!--leftnav wrapper start-->
+	<div class="leftnav-wrapper">
+		<!--brand log start -->
+		<div class="brand-logo">
+			<img src="/assets/backend/levis-logo.png">
+		</div>
+		<!--brand log end-->
+		
+		<div class="leftnav">
+			<ul>
+				<li><a href="/backend">Dashboard</a></li>
+				<li><a href="/backend/community" class="active">View Community</a></li>
+				<li><a href="/backend/message">Message Group</a></li>
+				<li><a href="">Feature Product</a></li>
+				<li><a href="">Edit Brand Page</a></li>
+				<li><a href="">Add/Edit Inititatives</a></li>
+				<li><a href="">Settings</a></li>
+			</ul>
+		</div>
+		<div class="leftnav-bottom-border"></div>
+		
+	</div>
+	<!--leftnav wrapper ent-->
+	
+	<!--content wrapper start-->
+	<div class="content-wrapper" id="community-viewer">
+		<!--title wrapper start-->
+		<div class="title-wrapper">
+			<img id="plus-map" src="/assets/backend/icons/plus-red-round-no-fill.png">
+			<img id="plus-map" src="/assets/backend/icons/minus-red-round-no-fill.png">
+			<span>Community Viewer</span>
+			
+			<!--supporters filter menu start-->
+			<div id="menu-wrapper" align="right">
+				<ul class="menu">
+					<li>
+						<a href="#" class="dropdown" data-toggle="filter-menu"><div class="icon-up"></div></a>
+						<ul class="dropdown-menu" id="filter-menu">
+							<li><a href="#">ALL SUPPORTERS</a></li>
+							<li><a href="#">NEW SUPPORTERS</a></li>
+							<li><a href="#">AVERAGE USER AGE</a></li>
+							<li><a href="#">MOST ACTIVE SUPPORTERS</a></li>
+							<li><a href="#">SOCIAL MEDIA SHARES</a></li>
+							<li class="seperator"><a href="#">View All States</a></li>
+						<ul>
+					</li>
+				</ul>
+			</div>
+			<!--supporters filter menu end-->
+			
+		</div>
+		<!-- title wrapper end-->
+		
+		<!--map wrapper start-->
+		<div class="map-wrapper">
+			<img id="map" src="/assets/backend/map.png">
+			<div id="fullsize-button"></div>
+		</div>
+		<!--map wrapper end-->
+		
+		<!--section start-->
+		<div class="section-title">The Community</div>
+		
+		<div class="section4">
+			<div class="title">Locations</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/locations.png">
+			</div>
+			<div class="content"><span>23</span></div>
+		</div>
+		<div class="section4">
+			<div class="title">New Supporters</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/new-supporters.png">
+			</div>
+			<div class="content"><span>115</span></div>
+		</div>
+		<div class="section4">
+			<div class="title">Average Age</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/average-age.png">
+			</div>
+			<div class="content"><span>24</span></div>
+		</div>
+		<div class="section4 last">
+			<div class="title">Lead Gender</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/lead-gender.png">
+			</div>
+			<div class="content"><span>Men</span></div>
+		</div>
+		<div class="section4">
+			<div class="title">Active Shoppers</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/active-shoppers.png">
+			</div>
+			<div class="content"><span>327</span></div>
+		</div>
+		<div class="section4">
+			<div class="title">Social Shares</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/social-shares.png">
+			</div>
+			<div class="content"><span>62</span></div>
+		</div>
+		<div class="section4">
+			<div class="title">Also Following</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/following.png">
+			</div>
+			<div class="content"><span>nike</span></div>
+		</div>
+		<div class="section4 last">
+			<div class="title">Periodicity</div>
+			<div class="icon">
+				<img src="/assets/backend/icons/periodicity.png">
+			</div>
+			<div class="content"><span>4 days</span></div>
+		</div>
+		<!--section end-->
+		
+		<div class="clear"></div>
+		
+		<!--supporters wrapper start-->
+		<div id="supporters-wrapper">
+			<div class="title">
+				<span>Supporters</span>
+				<div class="filter">
+					<div class="filter-button"></div>
+					<div class="filter-content"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+			<!--user section start-->
+			<div class="user-section">
+				<img src="/assets/backend/users/user1.png">
+				<div class="intro">
+					<h5>Santiago Camelo</h5>
+					<p>Montevideo, Uruguay</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user2.png">
+				<div class="intro">
+					<h5>Claudia Glass</h5>
+					<p>El Canal, Panama</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user3.png">
+				<div class="intro">
+					<h5>Sofia Cala</h5>
+					<p>Luisiana, USA</p>
+				</div>
+			</div>
+			<div class="user-section last">
+				<img src="/assets/backend/users/user4.png">
+				<div class="intro">
+					<h5>Peter Capussoto</h5>
+					<p>Milan, Italy</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user5.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user6.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user7.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section last">
+				<img src="/assets/backend/users/user8.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user1.png">
+				<div class="intro">
+					<h5>Santiago Camelo</h5>
+					<p>Montevideo, Uruguay</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user2.png">
+				<div class="intro">
+					<h5>Claudia Glass</h5>
+					<p>El Canal, Panama</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user3.png">
+				<div class="intro">
+					<h5>Sofia Cala</h5>
+					<p>Luisiana, USA</p>
+				</div>
+			</div>
+			<div class="user-section last">
+				<img src="/assets/backend/users/user4.png">
+				<div class="intro">
+					<h5>Peter Capussoto</h5>
+					<p>Milan, Italy</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user5.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user6.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section">
+				<img src="/assets/backend/users/user7.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<div class="user-section last">
+				<img src="/assets/backend/users/user8.png">
+				<div class="intro">
+					<h5>User Name</h5>
+					<p>Location, Country</p>
+				</div>
+			</div>
+			<!--user section end-->
+			
+			
+			
+		</div>
+		<!--supporters wrapper end-->
+	</div>
+	<!--content wrapper end-->
+</div>
+
