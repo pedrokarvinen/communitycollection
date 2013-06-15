@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  brand: 
+  page_url: MyString
+  ip_address: MyString
+  visited_at: 2013-06-16 02:31:32
+
+two:
+  user: 
+  brand: 
+  page_url: MyString
+  ip_address: MyString
+  visited_at: 2013-06-16 02:31:32

@@ -26,12 +26,15 @@ ActiveRecord::Schema.define(:version => 20130530203311) do
   add_index "articles", ["initiative_id"], :name => "index_articles_on_initiative_id"
 
   create_table "brands", :force => true do |t|
+    t.intger   "user_id"
     t.string   "name"
     t.string   "slug"
     t.text     "about"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  add_index "brands", ["user_id"], :name => "index_brands_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.string   "cat_id"

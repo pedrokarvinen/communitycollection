@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  email: MyString
+  password: MyString
+  type: 
+  facebook_auth_id: MyString
+  twitter_auth_id: MyString
+  is_active: false
+  is_deleted: false
+  create_at: 2013-06-16 01:44:33
+  updated_at: 2013-06-16 01:44:33
+  auth_hash: MyString
+
+two:
+  email: MyString
+  password: MyString
+  type: 
+  facebook_auth_id: MyString
+  twitter_auth_id: MyString
+  is_active: false
+  is_deleted: false
+  create_at: 2013-06-16 01:44:33
+  updated_at: 2013-06-16 01:44:33
+  auth_hash: MyString
