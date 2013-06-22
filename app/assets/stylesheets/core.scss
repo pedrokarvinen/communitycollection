@@ -23,6 +23,7 @@ $base_darkblue  : #107090;
 @import "../sass/shop/_brands";
 
 @import "../sass/backend/_dashboard";
+@import "../sass/auth/_auth";
 
 
 body {
@@ -417,5 +418,5 @@ body {
 }
 
 .clear{
-  both: clear;
+  clear: both;
 }

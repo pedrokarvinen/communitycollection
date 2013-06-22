@@ -1,0 +1,90 @@
+<% content_for :after_scripts do %>
+  
+  <script>
+    $(function(){
+      
+      CC.load_background("signin-bg.png");
+      
+      $(".sign-in-button").click( function(e){
+      	e.preventDefault();
+      	var email = $('#email').val();
+    	var password = $("#password").val();
+    	var is_stay = $('#stay_signed_in').is(':checked') == true?1:0;
+
+      	if( validate_signin_form() ){
+      		$.ajax({
+      			url: "/auth/do_login",
+      			type: "POST",
+      			data: {'email':email, 'password':password , 'is_stay':is_stay},
+      			cache: false,
+      			success: function(data){
+      				console.log(data)
+      				if(data.status == 'success'){
+      					location.href = data.redirect_url;
+      				}else{
+      					$('.signin-form label').addClass('error');
+      				}
+      			},
+      			error: function(XMLHttpRequest, textStatus, errorThrown){
+      				console.log(XMLHttpRequest);
+      			}
+      		});
+      	}
+      });
+      
+      $("#email, #password").focus(function(){
+      	$(this).parent().prev().removeClass('error');
+      });
+
+    });
+    
+    function validate_signin_form(){
+    	var is_valid = true;
+    	var email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    	var email = $('#email').val();
+    	var password = $("#password").val();
+    	
+    	if(email_pattern.test(email) == false){
+    		$('label[for="email"]').addClass('error');
+    		is_valid = false;
+    	}
+    	
+    	if(password == ''){
+    		$('label[for="password"]').addClass('error');
+    		is_valid = false;
+    	}
+    	
+    	return is_valid;
+    }
+    
+    
+  </script>
+
+<% end %>
+
+<div class="signin-wrapper">
+	<h4>Sign In to Community Collection</h4>
+	<div class="signin-form">
+		<label for="email">Email or Username</label>
+		<div class="text-wrapper"><input type="text" name="email" id="email" value="<%=@email %>" /></div>
+		<label for="password">Password</label>
+		<div class="text-wrapper"><input type="password" name="password" id="password" value="<%=@password %>" /></div>
+		<div class="links-wrapper">
+			<a href="#" class="forgot-password-link">Forgot password?</a>
+			<input type="checkbox" name="stay_signed_in" id="stay_signed_in" class="checkbox" <%='checked' if @stay_signed_in == 1 %>>&nbsp;<a href="#" class="stay-signed-in-link">Remember Me</a>
+		</div>
+	</div>
+	<div class="social-buttons">
+		<div class="button-wrapper"><img src="/assets/buttons/signin-with-facebook.png"></div>
+		<div class="button-wrapper"><img src="/assets/buttons/signin-with-twitter.png"></div>
+	</div>
+	<div class="clear"></div>
+	<div class="action-buttons">
+		<a href="#" class="no-account-link">Don't have account yet?</a>
+		<a href="#" class="no-account-button"><img src="/assets/buttons/register.png"></a>
+		<a href="#" class="sign-in-button"><img src="/assets/buttons/signin.png"></a>
+		<div class="clear"></div>
+	</div>
+	
+	
+</div>

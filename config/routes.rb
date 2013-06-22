@@ -1,5 +1,13 @@
 Communitycollection::Application.routes.draw do
   
+  #actions in auth controller
+  get "auth/signin"
+  post "auth/do_login"
+  get "auth/do_logout"
+  
+  #actions in user controller
+  post "user/add_wishlist"
+  
   #actions in admin/brands controller
   get "brands/index";
   get "brands/new";
@@ -55,7 +63,9 @@ Communitycollection::Application.routes.draw do
   get "scrap/levis"
   post "scrap/levis"
   
-  root :to => 'shop#index';
+  root :to => 'auth#signin';
+  
+  match 'sign-out' => 'auth#do_logout'
   
   #routes for backend in front end
   match 'backend' => 'backend#dashboard'

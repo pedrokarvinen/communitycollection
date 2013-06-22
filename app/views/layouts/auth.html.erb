@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Community Collection</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>  
+  
+  <%= javascript_include_tag "application" %>
+  
+  <%= csrf_meta_tags %>
+  
+  <%= yield :after_stylesheets %>
+  
+</head>
+<body>
+
+	<div id="main-menu" class="shop">		
+		<div class="container_24">	
+			<div class="grid_6 alpha">
+				<a href="/" class="logo">
+					<img src="/assets/cc-logo.png" alt="">
+				</a>
+			</div>
+
+			<div class="grid_6">
+				<!-- flash notification container -->
+				&nbsp;
+			</div>
+
+			<div class="grid_2">
+				<a href="#">
+					<img class="search-icon" src="/assets/icon-search.png" alt="search"></div>
+				</a>
+				<nav>
+					
+					<div class="grid_3 menu discover">
+						<a class="discover" href="/discover">Discover</a>
+					</div>
+					
+					<div class="grid_3 menu shop">
+						<a class="shop" href="/shop">Shop</a>
+					</div>
+					
+					<div class="grid_3 menu sign-in">
+						<a class="sign-in selected" href="/backend/dashboard">Sign In</a>
+					</div>	
+	
+				</nav>
+			
+				<div class="grid_1 omega">
+					<a href="#">
+						<img class="settings-icon" src="/assets/icon-settings.png" alt="settings">
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<div class="container_24">
+
+		<%= yield %>
+
+	</div>
+
+	<%= yield :shop_main_slider %>
+	
+	<%= yield :after_scripts %>
+
+</body>
+</html>
