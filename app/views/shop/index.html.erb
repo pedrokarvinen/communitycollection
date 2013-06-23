@@ -627,27 +627,27 @@
 				
 				main_image_path = ''
 				p.images.each do |img|
-					html = ''
-		    	html += '		<div class="item-thumb-wrapper">'
+			       html = ''
+		          html += '		<div class="item-thumb-wrapper">'
 		    	html += '			<img src="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
 		    	html += '		</div>'
 		    	thumb_html = html + thumb_html
 		    	main_image_path = img.image_path
 	      end
 	      
-				item_html += '<div class="quarter-column condenseds">'
-	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
-	      item_html += '		<div class="triangle"></div>'
-	      item_html += '   	<a href="#">'
-	      item_html += '	      <img src="' + p.images.last.image_path + '" alt="">'
-	      item_html += '				<div>'			
-	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
-	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
-	      item_html += '		      <h3>US$ ' + p.price.to_s + '</h3>'
-	      item_html += '				</div>'	
-	      item_html += '	    </a>'
-	      item_html += '	  </div>' 
-	      item_html += '</div>'
+		  item_html += '<div class="quarter-column condenseds">'
+  	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
+  	      item_html += '		<div class="triangle"></div>'
+  	      item_html += '   	<a href="#">'
+  	      item_html += '	      <img src="' + main_image_path + '" alt="">'
+  	      item_html += '				<div>'			
+  	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
+  	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
+  	      item_html += '		      <h3>US$ ' + p.price.to_s + '</h3>'
+  	      item_html += '				</div>'	
+  	      item_html += '	    </a>'
+  	      item_html += '	  </div>' 
+  	      item_html += '</div>'
 	      
 	      
 	      desc_html += '<div class="item-description description' + p.id.to_s + '">'
@@ -655,7 +655,7 @@
 	      desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
 	      desc_html += '	</div>'
 		    desc_html += '	<div class="image-wrapper">'
-		    desc_html += '		<img src="' + p.images.last.image_path + '" alt="">'
+		    desc_html += '		<img src="' + main_image_path + '" alt="">'
 		    desc_html += '	</div>'
 		    
 		    desc_html += '	<div class="thumbs-wrapper">'
