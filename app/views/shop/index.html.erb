@@ -626,7 +626,7 @@
 				i = i+1
 				
 				main_image_path = ''
-				p.images.each do |img|
+				p.images.reverse_each do |img|
 			       html = ''
 		          html += '		<div class="item-thumb-wrapper">'
 		    	html += '			<img src="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
