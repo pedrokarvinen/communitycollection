@@ -1,17 +1,27 @@
 class DiscoverController < ApplicationController
   def index
-    
+    if current_user.nil?
+      redirect_to '/'
+    end
   end
   
   def bybrand
-    
+    if current_user.nil?
+      redirect_to '/'
+    end
   end
   
   def byinitiative
-    
+    if current_user.nil?
+      redirect_to '/'
+    end
   end
   
   def brand
+    if current_user.nil?
+      redirect_to '/'
+    end
+    
     @brand = Brand.find(:first, :conditions => "slug = '#{params[:brand]}'")
     if not @brand
       redirect_to "/discover/by-brand"
@@ -19,6 +29,9 @@ class DiscoverController < ApplicationController
   end
   
   def initiative
+    if current_user.nil?
+      redirect_to '/'
+    end
     @brand = Brand.find(:first, :conditions => "slug = '#{params[:brand]}'")
     if not @brand
       redirect_to "/discover/by-brand"
@@ -32,6 +45,9 @@ class DiscoverController < ApplicationController
   end
   
   def article
+    if current_user.nil?
+      redirect_to '/'
+    end
     @brand = Brand.find(:first, :conditions => "slug = '#{params[:brand]}'")
     if not @brand
       redirect_to "/discover/by-brand"

@@ -7,6 +7,7 @@ Communitycollection::Application.routes.draw do
   
   #actions in user controller
   post "user/add_wishlist"
+  post "user/visit_page"
   
   #actions in admin/brands controller
   get "brands/index";

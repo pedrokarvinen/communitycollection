@@ -261,6 +261,27 @@
         }
       });
     }
+    
+    function pageview(brand_id, page_url){
+      
+      $.ajax({
+        url: "/user/visit_page",
+    	type: "POST",
+    	data: {'brand_id':brand_id, 'page_url':page_url },
+    	cache: false,
+    	success: function(data){
+          console.log(data)
+          if(data.status == 'success'){
+            //window.open(page_url);
+          }
+    	},
+    	error: function(XMLHttpRequest, textStatus, errorThrown){
+          console.log(XMLHttpRequest);
+        }
+      });
+      
+      return true
+    }
   </script>
 
 <% end %>
@@ -649,7 +670,7 @@
 		    desc_html += '		<p>' + p.description + '</p>'
 		    desc_html += '		<div class="price">US$' + p.price.to_s + '</div>'
 		    		
-		    desc_html += '		<a href= "http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '" class="purchase-button" target="_blank">PURCHASE from levi.com</a>'
+		    desc_html += '		<a href= "http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '" class="purchase-button" target="_blank" onclick="javascript:pageview(\'' + p.brand.id.to_s + '\', \'http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '\');">PURCHASE from levi.com</a>'
 		    desc_html += '		<div class="other-buttons">'
 		    desc_html += '			<a href="javascript:add_wishlist(\'' + p.id.to_s + '\');">ADD TO WISH LIST</a>'
 		    desc_html += '			<a href="#" class="last">SHARE THIS ITEM</a>'

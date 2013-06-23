@@ -1,5 +1,10 @@
 class ShopController < ApplicationController
   def index
+  
+    if current_user.nil?
+      redirect_to '/'
+    end
+    
     @brands = Brand.all
     if params[:brand]
       @brand_slug = params[:brand]
@@ -68,6 +73,8 @@ class ShopController < ApplicationController
   end
   
   def brands
-    
+    if current_user.nil?
+      redirect_to '/'
+    end
   end
 end
