@@ -74,11 +74,11 @@ body.shop #main-menu {
   .logo {
     @include opacity(0);
   }
+
 }
 
 .page-navigation {
   height: 85px;
-
   ul {
     li {
       display: inline-block;

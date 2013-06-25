@@ -7,6 +7,8 @@
     $(function(){
       CC.load_background("discover-background-gray-to-white.jpg");
       
+      //$("img.lazy").lazyload();
+      
       // custom scollbar for filters in the left panel
       if (!$.browser.webkit) {
       	$('.section .root').jScrollPane();
@@ -44,8 +46,6 @@
 
       $(window).resize();
 
-      var snapped = false;
-
       $(window).scroll(function () { 
 
         if(!snapped){
@@ -56,6 +56,9 @@
             
             $('#shop-header').hide(100);
             $("html, body").animate({scrollTop : 0}, 1500).removeClass('shop');
+            
+            $('#main-menu').addClass('fixed');
+            $('#main-content').addClass('fixed');
           }
         }
 
@@ -213,6 +216,8 @@
           	}
           });
           
+          items_row.find('img').trigger("appear");
+          
 
         });
         
@@ -283,33 +288,42 @@
       return true
     }
   </script>
+  
+  <script src="/assets/jquery.lazyload.js?v=1.8.4" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+      $(function() {
+          $("img").lazyload();
+      });
+  </script>
 
 <% end %>
 
 
 
 <% content_for :shop_header do %>
-  
-  <div id="shop-header">
-    <div class="container_24">
-    
-      <a href="/" class="logo">
-        <img src="/assets/cc-logo.png" alt="">
-      </a>
 
-      <h1 class="huge">
-        Making the world<br>
-        a better place
-      </h1>
-
-      <a href="/discover" class="discover-now">Discover now<span>&nbsp;</span></a>
-
-      <div id="brands-ticker">
-        <img src="/assets/shop/brands-ticker.png" alt="Our Brands">
-      </div>
-
-    </div>
-  </div>
+	<% if request.fullpath == '/' %>  
+	  <div id="shop-header">
+	    <div class="container_24">
+	    
+	      <a href="/" class="logo">
+	        <img src="/assets/cc-logo.png" alt="">
+	      </a>
+	
+	      <h1 class="huge">
+	        Making the world<br>
+	        a better place
+	      </h1>
+	
+	      <a href="/discover" class="discover-now">Discover now<span>&nbsp;</span></a>
+	
+	      <div id="brands-ticker">
+	        <img src="/assets/shop/brands-ticker.png" alt="Our Brands">
+	      </div>
+	
+	    </div>
+	  </div>
+	<% end %>
 
 <% end %>
 
@@ -629,7 +643,7 @@
 				p.images.each do |img|
 			       html = ''
 		          html += '		<div class="item-thumb-wrapper">'
-		    	html += '			<img src="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
+		    	html += '			<img class="lazy" src="/assets/shop/items/item1.jpg" data-original="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
 		    	html += '		</div>'
 		    	thumb_html = html + thumb_html
 		    	main_image_path = img.image_path
@@ -639,7 +653,7 @@
   	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
   	      item_html += '		<div class="triangle"></div>'
   	      item_html += '   	<a href="#">'
-  	      item_html += '	      <img src="' + main_image_path + '" alt="">'
+  	      item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + main_image_path + '">'
   	      item_html += '				<div>'			
   	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
   	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
@@ -655,7 +669,7 @@
 	      desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
 	      desc_html += '	</div>'
 		    desc_html += '	<div class="image-wrapper">'
-		    desc_html += '		<img src="' + main_image_path + '" alt="">'
+		    desc_html += '		<img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + main_image_path + '">'
 		    desc_html += '	</div>'
 		    
 		    desc_html += '	<div class="thumbs-wrapper">'
@@ -709,4 +723,5 @@
 <% end %>
 
 <div style="clear: both;"></div>
+
 

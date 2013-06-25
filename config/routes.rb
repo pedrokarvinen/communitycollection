@@ -9,6 +9,11 @@ Communitycollection::Application.routes.draw do
   post "user/add_wishlist"
   post "user/visit_page"
   
+  #actions in search controller
+  get "search/index"
+  get "search/products"
+  get "search/initiatives"
+  
   #actions in admin/brands controller
   get "brands/index";
   get "brands/new";
@@ -64,12 +69,16 @@ Communitycollection::Application.routes.draw do
   get "scrap/levis"
   post "scrap/levis"
   
-  root :to => 'auth#signin';
+  root :to => 'shop#index';
   
+  match 'sign-in' => 'auth#signin'
   match 'sign-out' => 'auth#do_logout'
   
   #routes for backend in front end
   match 'backend' => 'backend#dashboard'
+  
+  #routes for search in front end
+  match 'search' => 'search#index'
   
   #routes for shop in front end
   match 'shop' => 'shop#index';

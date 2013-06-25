@@ -10,16 +10,133 @@
   
   <%= yield :after_stylesheets %>
   
+  <script>
+  	var snapped = false;
+  	
+  	$(document).ready(function(){
+  	<% if @current_user.nil? %>
+  		$('a.sign-in').click(function(e){
+  			e.preventDefault();
+ 			
+ 			
+        <% if request.fullpath == '/' %>
+	        if(snapped == false){   
+	        	$('body').toggleClass('shop');  
+	 			if($(this).hasClass('selected')){
+	 				$('.signin-container').animate({
+		            	height: 'toggle'
+		        	},1000, 'easeInOutQuint', function(){
+		        		$('#shop-header').animate({
+			            	height: 'toggle'
+			        	},10, 'easeInOutQuint');
+			        	$('#main-menu').toggleClass('fixed');
+	            		$('#main-content').toggleClass('fixed');
+		        	});
+		        	
+		        		
+	 			}else{
+	 				$('#main-menu').toggleClass('fixed');
+	            	$('#main-content').toggleClass('fixed');
+		        	$('#shop-header').animate({
+		            	height: 'toggle'
+		        	},10, 'easeInOutQuint', function(){
+		        		$('.signin-container').animate({
+				            height: 'toggle'
+				        },1000, 'easeInOutQuint');
+		        	});
+	 			}
+	 		}else{
+	 			$('.signin-container').animate({
+		            height: 'toggle'
+		        },1000, 'easeInOutQuint');
+	 		}
+ 		<% else %>
+ 			$('.signin-container').animate({
+	            height: 'toggle'
+	        },1000, 'easeInOutQuint');
+ 		<% end %>
+ 			 			
+ 			$(this).toggleClass('selected');
+  			
+  		});
+  	<% else %>
+  		$('a.sign-in').html('Sign Out')
+  	<% end %>	
+  		$(".sign-in-button").click( function(e){
+      	e.preventDefault();
+      	var email = $('#email').val();
+    	var password = $("#password").val();
+    	var is_stay = $('#stay_signed_in').is(':checked') == true?1:0;
+
+      	if( validate_signin_form() ){
+      		$.ajax({
+      			url: "/auth/do_login",
+      			type: "POST",
+      			data: {'email':email, 'password':password , 'is_stay':is_stay},
+      			cache: false,
+      			success: function(data){
+      				console.log(data)
+      				if(data.status == 'success'){
+      					//location.href = data.redirect_url;
+      					//alert("Signed in successfully!")
+      					$('.signin-container').hide();
+      					$('a.sign-in').toggleClass('selected');
+      					$('a.sign-in').unbind('click');
+      					$('a.sign-in').html('Sign Out')
+      				}else{
+      					$('.signin-form label').addClass('error');
+      				}
+      			},
+      			error: function(XMLHttpRequest, textStatus, errorThrown){
+      				console.log(XMLHttpRequest);
+      			}
+      		});
+      	}
+      });
+      
+      $("#email, #password").focus(function(){
+      	$(this).parent().prev().removeClass('error');
+      });
+      
+  	});
+  	
+  	function validate_signin_form(){
+    	var is_valid = true;
+    	var email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    	var email = $('#email').val();
+    	var password = $("#password").val();
+    	
+    	if(email_pattern.test(email) == false){
+    		$('label[for="email"]').addClass('error');
+    		is_valid = false;
+    	}
+    	
+    	if(password == ''){
+    		$('label[for="password"]').addClass('error');
+    		is_valid = false;
+    	}
+    	
+    	return is_valid;
+    }
+  </script>
+  
 </head>
 <body>
 
 	<%= yield :shop_header %>
 
 	<% if (request.path_info.include? "/discover") %> 
-		<div id="main-menu" class="discover">
-	<% else %>
-		<div id="main-menu" class="shop">
-	<% end %>		
+		<div id="main-menu" class="discover fixed">
+	<% else 
+		if (request.fullpath == "/") %>
+			<div id="main-menu">
+			
+	<% 	else %>
+			<div id="main-menu" class="shop fixed">
+	<% 
+		end
+	end 
+	%>		
 			
 			<div class="container_24">	
 				<div class="grid_6 alpha">
@@ -34,7 +151,7 @@
 				</div>
 
 				<div class="grid_2">
-					<a href="#">
+					<a href="/search">
 						<img class="search-icon" src="/assets/icon-search.png" alt="search"></div>
 					</a>
 				<nav>
@@ -50,7 +167,7 @@
 					</div>
 					
 					<div class="grid_3 menu shop">
-						<% if (controller.controller_name.include? "shop") %> 
+						<% if (controller.controller_name.include? "shop") && (request.fullpath != '/') %> 
 							<a class="shop selected" href="/shop">Shop</a>
 						<% else %>
 							<a class="shop" href="/shop">Shop</a>
@@ -59,12 +176,12 @@
 					</div>
 					
 					<div class="grid_3 menu sign-in">
-						<a class="sign-in" href="/sign-out">Sign Out</a>
+						<a class="sign-in" href="/sign-out">Sign In</a>
 					</div>	
 
 				</nav>
 				
-				<div class="grid_1 omega">
+				<div class="grid_1 omega settings">
 					<a href="/backend">
 						<img class="settings-icon" src="/assets/icon-settings.png" alt="settings">
 					</a>
@@ -72,9 +189,36 @@
 			</div>
 
 		</div>
-
-
-		<div class="container_24">
+		
+		<div class="signin-container">
+			<div class="signin-wrapper">
+				<h4>Sign In to Community Collection</h4>
+				<div class="signin-form">
+					<label for="email">Email or Username</label>
+					<div class="text-wrapper"><input type="text" name="email" id="email" value="<%=@email %>" /></div>
+					<label for="password">Password</label>
+					<div class="text-wrapper"><input type="password" name="password" id="password" value="<%=@password %>" /></div>
+					<div class="links-wrapper">
+						<a href="#" class="forgot-password-link">Forgot password?</a>
+						<input type="checkbox" name="stay_signed_in" id="stay_signed_in" class="checkbox" <%='checked' if @stay_signed_in == 1 %>>&nbsp;<a href="#" class="stay-signed-in-link">Remember Me</a>
+					</div>
+				</div>
+				<div class="social-buttons">
+					<div class="button-wrapper"><img src="/assets/buttons/signin-with-facebook.png"></div>
+					<div class="button-wrapper"><img src="/assets/buttons/signin-with-twitter.png"></div>
+				</div>
+				<div class="clear"></div>
+				<div class="action-buttons">
+					<a href="#" class="no-account-link">Don't have account yet?</a>
+					<a href="#" class="no-account-button"><img src="/assets/buttons/register.png"></a>
+					<a href="#" class="sign-in-button"><img src="/assets/buttons/signin.png"></a>
+					<div class="clear"></div>
+				</div>	
+				
+			</div>
+		</div>
+		
+		<div class="container_24 <%="fixed" if request.fullpath != '/' %>" id="main-content">
 
 			<%= yield %>
 

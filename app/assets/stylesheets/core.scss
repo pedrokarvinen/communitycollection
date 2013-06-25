@@ -25,11 +25,21 @@ $base_darkblue  : #107090;
 @import "../sass/backend/_dashboard";
 @import "../sass/auth/_auth";
 
+@import "../sass/search/_main";
 
 body {
   background: #fff;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+#page-title{
+  padding-top: 60px;
+  h4{
+    font-size: 40px;
+    font-family: "light", sans-serif;
+    color: #333333;
+  }
 }
 
 #main-menu {
@@ -46,6 +56,13 @@ body {
 
   &.shop {
     border-bottom: 2px solid $base_yellow;
+  
+  }
+  
+  &.fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
   }
 
   .search-icon {
@@ -86,6 +103,12 @@ body {
         &.sign-in   { background: $base_orange; }
       }
     }
+  }
+}
+
+#main-content{
+  &.fixed{
+    padding-top: 40px;
   }
 }
 
