@@ -4,6 +4,7 @@ class SearchController < ApplicationController
   end
   
   def products
+    @products = Product.order('random()').all
   end
   
   def initiatives

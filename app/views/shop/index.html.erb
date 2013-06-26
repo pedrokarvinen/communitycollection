@@ -21,7 +21,7 @@
       $('.collections .root').show();
       
 
-      $('body').addClass('shop');
+      //$('body').addClass('shop');
 
       $('#shop-header').fadeTo(0,0);
 
@@ -30,7 +30,7 @@
       }
 
       var shopSlider = $('#shop-main-slider');
-
+	
       $(window).resize(function(){
 
         var pos = (($(window).width()*.5) - (shopSlider.width()*.5))
@@ -43,9 +43,11 @@
           'margin-left', pos
         );
       });
+    
 
       $(window).resize();
-
+      
+	<% if request.fullpath == '/' %>
       $(window).scroll(function () { 
 
         if(!snapped){
@@ -63,6 +65,7 @@
         }
 
       });
+    <% end %>
 
       var ShopSlideshow = function(){
         
@@ -632,6 +635,7 @@
 		<%
 		if @products
 			i = 0
+			row_num = 1
 			item_html = ''
 			desc_html = ''
 			thumb_html = ''
@@ -653,7 +657,12 @@
   	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
   	      item_html += '		<div class="triangle"></div>'
   	      item_html += '   	<a href="#">'
-  	      item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + main_image_path + '">'
+  	      if row_num == 1
+  	      	item_html += '	      <img class="lazy" alt="" src="' + main_image_path + '">'
+  	      else
+  	      	item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + main_image_path + '">'
+  	      end
+  	      
   	      item_html += '				<div>'			
   	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
   	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
@@ -695,6 +704,7 @@
 	      desc_html += ' </div>'
 	      
 	      if i == 3
+	      	row_num += 1
 					i = 0
 		%>
 					<div class="items-row clearfix">
