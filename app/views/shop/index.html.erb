@@ -644,6 +644,7 @@
 				i = i+1
 				images = p.images[0..-1]  || []
 				main_image_path = ''
+<<<<<<< HEAD
 				images.each do |img|
 			       	html = ''
 		          	html += '		<div class="item-thumb-wrapper">'
@@ -652,6 +653,16 @@
 		    		thumb_html = html + thumb_html
 		    		main_image_path = img.image_path
 	      		end
+=======
+				p.images.reverse_each do |img|
+			       html = ''
+		          html += '		<div class="item-thumb-wrapper">'
+		    	html += '			<img src="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
+		    	html += '		</div>'
+		    	thumb_html = html + thumb_html
+		    	main_image_path = img.image_path
+	      end
+>>>>>>> b49362761aec41a3602daba1e6495ec5a99c59a2
 	      
 		  		item_html += '<div class="quarter-column condenseds">'
   	      		item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
