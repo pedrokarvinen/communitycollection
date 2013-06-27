@@ -41,7 +41,7 @@ function pageview(brand_id, page_url){
 			<li>
 				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
 				<div class="intro">
-					<h6><%=b.name %></h6>
+					<a href="/discover/by-brand/<%=b.slug %>" target="_blank"><h6><%=b.name %></h6></a>
 					<p>WaterLess</p>
 				</div>
 				<div class="clear"></div>
@@ -64,9 +64,9 @@ function pageview(brand_id, page_url){
 	<% if @result[:initiatives_count] > 0 %>
 		<% @result[:initiatives].each do |p| %>
 			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
+				<img src="/assets/gallery/initiatives/<%=p.brand.slug %>/<%=p.thumbnail %>" width="60" height="60">
 				<div class="intro">
-					<h6><%=p.name %></h6>
+					<a href="/discover/by-brand/<%=p.brand.slug %>/<%=p.slug %>" target="_blank"><h6><%=p.name %></h6></a>
 					<p><%=p.brand.name %></p>
 				</div>
 				<div class="clear"></div>
