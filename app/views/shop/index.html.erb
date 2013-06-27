@@ -645,7 +645,7 @@
 				images = p.images[0..-1]  || []
 				main_image_path = ''
 
-				images.each do |img|
+				images.reverse_each do |img|
 			       	html = ''
 		          	html += '		<div class="item-thumb-wrapper">'
 		    		html += '			<img class="lazy" src="/assets/shop/items/item1.jpg" data-original="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
@@ -659,9 +659,9 @@
 	  	      	item_html += '		<div class="triangle"></div>'
 	  	      	item_html += '   	<a href="#">'
 	  	      	if row_num == 1
-	  	      		item_html += '	      <img class="lazy" alt="" src="' + images.last.image_path + '">'
+	  	      		item_html += '	      <img class="lazy" alt="" src="' + images.first.image_path + '">'
 	  	      	else
-	  	      		item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + images.last.image_path + '">'
+	  	      		item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + images.first.image_path + '">'
 	  	      	end
   	      
   	      		item_html += '				<div>'			
@@ -679,7 +679,7 @@
 	      		desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
 	      		desc_html += '	</div>'
 		    	desc_html += '	<div class="image-wrapper">'
-		    	desc_html += '		<img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + images.last.image_path + '">'
+		    	desc_html += '		<img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + images.first.image_path + '">'
 			    desc_html += '	</div>'
 			    
 			    desc_html += '	<div class="thumbs-wrapper">'
