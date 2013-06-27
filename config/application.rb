@@ -62,6 +62,5 @@ module Communitycollection
     
     config.assets.precompile += %w( bootstrap.css )
     config.assets.precompile += %w( bootstrap.js )
-    config.assets.precompile += %w( core.css )
   end
 end

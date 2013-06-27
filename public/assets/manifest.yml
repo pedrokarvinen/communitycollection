@@ -345,8 +345,6 @@ application.js: application-e8a53313fa11fe1d4439f05a4281bc12.js
 application/index.js: application-e8a53313fa11fe1d4439f05a4281bc12.js
 application.css: application-ec159c18cf4b0cc3ae6229a3dfde7c5f.css
 application/index.css: application-ec159c18cf4b0cc3ae6229a3dfde7c5f.css
-core.css: core-411042a6988b1779702ecd7c800a60f3.css
-core/index.css: core-411042a6988b1779702ecd7c800a60f3.css
 bootstrap.js: bootstrap-bd0624bd1174bd578c53b7a9b5594cae.js
 bootstrap/index.js: bootstrap-bd0624bd1174bd578c53b7a9b5594cae.js
 img/glyphicons-halflings-white.png: img/glyphicons-halflings-white-326b0668f7165b8eddb98b43a1c674fd.png
