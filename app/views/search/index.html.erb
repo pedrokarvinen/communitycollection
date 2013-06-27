@@ -5,10 +5,31 @@
   </style>
   <script>
     $(function(){
-      CC.load_background("discover-background-gray-to-white.jpg");
-
-      $('#shop-header').fadeTo(0,0);
+      	CC.load_background("discover-background-gray-to-white.jpg");
+		
+		search_all();
+		
+		$('#keyword').change(function(){
+			search_all();
+		});
 	});
+	
+	function search_all(){
+		var keyword = $('#keyword').val();
+		$.ajax({
+	        url: "/search/search_all",
+	    	type: "POST",
+	    	data: {'keyword':keyword},
+	    	cache: false,
+	    	success: function(data){
+	          console.log(data)
+	          $('#search-result-wrapper').html(data);
+	    	},
+	    	error: function(XMLHttpRequest, textStatus, errorThrown){
+	          console.log(XMLHttpRequest);
+	        }
+	  	});
+	}
     
   </script>
 
@@ -23,96 +44,7 @@
 </div>
 
 <div id="search-result-wrapper">
-	<div class="column3">
-		<h5>BRANDS(2)</h5>
-		<hr></hr>
-		<ul>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>Levi's</h6>
-					<p>WaterLess</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>Industry of All Nations</h6>
-					<p>WaterLess</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-		</ul>
-	</div>
 	
-	<div class="column3">
-		<h5>INITIATIVES(12)</h5>
-		<hr></hr>
-		<ul>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>WaterLess</h6>
-					<p>Levi's</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>Made Here</h6>
-					<p>Levi's</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>WaterLess</h6>
-					<p>Levi's</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>WaterLess</h6>
-					<p>Levi's</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-			<li>
-				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
-				<div class="intro">
-					<h6>WaterLess</h6>
-					<p>Levi's</p>
-				</div>
-				<div class="clear"></div>
-			</li>
-		</ul>
-		<a href="#" class="view-all-link" id="initiatives-link">View All</a>
-	</div>
-	
-	<div class="column3">
-		<h5>PRODUCTS(144)</h5>
-		<hr></hr>
-		<ul>
-		<% if @products %>
-			<% @products.each do |p| %>
-				<li>
-					<img src="<%=p.images.first.thumb_path %>" width="60" height="60">
-					<div class="intro">
-						<h6><%=p.name %></h6>
-						<p><%=p.brand.name %></p>
-					</div>
-					<div class="clear"></div>
-				</li>
-			<% end %>
-		<% end %>
-		</ul>
-		<a href="/search/products" class="view-all-link" id="products-link">View All</a>
-	</div>
 </div>
 
 <div style="clear: both;"></div>

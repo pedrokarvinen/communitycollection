@@ -13,6 +13,10 @@ Communitycollection::Application.routes.draw do
   get "search/index"
   get "search/products"
   get "search/initiatives"
+  post "search/search_all"
+  post "search/search_products"
+  post "search/search_initiatives"
+  post "search/search_brands"
   
   #actions in admin/brands controller
   get "brands/index";

@@ -34,8 +34,6 @@ class AuthController < ApplicationController
     password = params[:password]
     is_stay = params[:is_stay]
     
-    
-    
     user = Users.where(:email => email, :password => password, :is_active => true, :is_deleted => false)
 
     msg = {}

@@ -1,0 +1,113 @@
+
+<script>
+$(function(){
+	$('#products-link').click(function(e){
+		e.preventDefault();
+		location.href = $(this).attr('href') + '?keyword=' + $('#keyword').val();
+	});
+	
+	$('#products > li').click(function(){
+		
+	});
+});
+
+function pageview(brand_id, page_url){
+      
+  $.ajax({
+    url: "/user/visit_page",
+	type: "POST",
+	data: {'brand_id':brand_id, 'page_url':page_url },
+	cache: false,
+	success: function(data){
+      console.log(data)
+      if(data.status == 'success'){
+        //window.open(page_url);
+      }
+	},
+	error: function(XMLHttpRequest, textStatus, errorThrown){
+      console.log(XMLHttpRequest);
+    }
+  });
+  
+  return true
+}
+</script>
+<div class="column3">
+	<h5>BRANDS(<%= @result[:brands_count] %>)</h5>
+	<hr></hr>
+	<ul class="brands">
+	<% if @result[:brands_count] > 0 %>
+		<% @result[:brands].each do |b| %>
+			<li>
+				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
+				<div class="intro">
+					<h6><%=b.name %></h6>
+					<p>WaterLess</p>
+				</div>
+				<div class="clear"></div>
+			</li>
+		<% end %>
+	<% else %>
+		<li><b><i>No Brands</i></b></li>
+	<% end %>
+	</ul>
+	<% if @result[:brands_count] > 5 %>
+		<a href="/search/brands" class="view-all-link" id="brands-link">View All</a>
+	<% end %>
+</div>
+
+<div class="column3">
+
+	<h5>INITIATIVES(<%= @result[:initiatives_count] %>)</h5>
+	<hr></hr>
+	<ul class="initiatives">
+	<% if @result[:initiatives_count] > 0 %>
+		<% @result[:initiatives].each do |p| %>
+			<li>
+				<img src="/assets/gallery/brands/levis.jpg" width="60" height="60">
+				<div class="intro">
+					<h6><%=p.name %></h6>
+					<p><%=p.brand.name %></p>
+				</div>
+				<div class="clear"></div>
+			</li>
+		<% end %>
+	<% else %>
+		<li><b><i>No Initiatives</i></b></li>
+	<% end %>
+	</ul>
+	<% if @result[:initiatives_count] > 5 %>
+		<a href="/search/initiatives" class="view-all-link" id="initiatives-link">View All</a>
+	<% end %>
+		
+</div>
+
+<div class="column3">
+	<h5>PRODUCTS(<%= @result[:products_count] %>)</h5>
+	<hr></hr>
+	<ul class="products">
+	<% if @result[:products_count] > 0 %>
+		<% @result[:products].each do |p| %>
+			<li>
+				<img src="<%=p.images.first.thumb_path %>" width="60" height="60">
+				<div class="intro">
+					<a href="http://us.levi.com/product/index.jsp?productId=<%=p.prod_id %>" target="_blank" onclick="javascript:pageview(\'' + p.brand.id.to_s + '\', \'http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '\');">
+						<h6><%=p.name %></h6>
+					</a>
+					<p><%=p.brand.name %></p>
+				</div>
+				<div class="clear"></div>
+			</li>
+		<% end %>
+	<% else %>
+		<li><b><i>No Products</i></b></li>
+	<% end %>
+	</ul>
+	<% if @result[:products_count] > 5 %>
+		<a href="/search/products" class="view-all-link" id="products-link">View All</a>
+	<% end %>
+</div>
+
+
+
+
