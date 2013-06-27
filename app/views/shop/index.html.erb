@@ -642,69 +642,69 @@
 			main_image_path = ''
 			@products.each do |p|
 				i = i+1
-				
+				images = p.images[0..-1]  || []
 				main_image_path = ''
-				p.images.each do |img|
-			       html = ''
-		          html += '		<div class="item-thumb-wrapper">'
-		    	html += '			<img class="lazy" src="/assets/shop/items/item1.jpg" data-original="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
-		    	html += '		</div>'
-		    	thumb_html = html + thumb_html
-		    	main_image_path = img.image_path
-	      end
+				images.each do |img|
+			       	html = ''
+		          	html += '		<div class="item-thumb-wrapper">'
+		    		html += '			<img class="lazy" src="/assets/shop/items/item1.jpg" data-original="' + img.thumb_path + '" alt="' + img.id.to_s + '" data-main="' + img.image_path + '">'
+		    		html += '		</div>'
+		    		thumb_html = html + thumb_html
+		    		main_image_path = img.image_path
+	      		end
 	      
-		  item_html += '<div class="quarter-column condenseds">'
-  	      item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
-  	      item_html += '		<div class="triangle"></div>'
-  	      item_html += '   	<a href="#">'
-  	      if row_num == 1
-  	      	item_html += '	      <img class="lazy" alt="" src="' + main_image_path + '">'
-  	      else
-  	      	item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + main_image_path + '">'
-  	      end
+		  		item_html += '<div class="quarter-column condenseds">'
+  	      		item_html += '	<div class="shop-item-wrapper" data-target="description' + p.id.to_s + '">'
+	  	      	item_html += '		<div class="triangle"></div>'
+	  	      	item_html += '   	<a href="#">'
+	  	      	if row_num == 1
+	  	      		item_html += '	      <img class="lazy" alt="" src="' + images.last.image_path + '">'
+	  	      	else
+	  	      		item_html += '	      <img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + images.last.image_path + '">'
+	  	      	end
   	      
-  	      item_html += '				<div>'			
-  	      item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
-  	      item_html += '		      <h4>' + p.name.upcase + '</h4>'
-  	      item_html += '		      <h3>US$ ' + p.price.to_s + '</h3>'
-  	      item_html += '				</div>'	
-  	      item_html += '	    </a>'
-  	      item_html += '	  </div>' 
-  	      item_html += '</div>'
+  	      		item_html += '				<div>'			
+  	      		item_html += '		      <h5>' + p.brand.name.upcase + '</h5>'
+  	      		item_html += '		      <h4>' + p.name.upcase + '</h4>'
+  	      		item_html += '		      <h3>US$ ' + p.price.to_s + '</h3>'
+  	      		item_html += '				</div>'	
+  	      		item_html += '	    </a>'
+  	      		item_html += '	  </div>' 
+  	      		item_html += '</div>'
 	      
 	      
-	      desc_html += '<div class="item-description description' + p.id.to_s + '">'
-	      desc_html += '	<div class="close-icon">'
-	      desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
-	      desc_html += '	</div>'
-		    desc_html += '	<div class="image-wrapper">'
-		    desc_html += '		<img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + main_image_path + '">'
-		    desc_html += '	</div>'
-		    
-		    desc_html += '	<div class="thumbs-wrapper">'
-		    
-		   	desc_html += thumb_html
-		    thumb_html = ''
-		 
-		    desc_html += '	</div>'
-		    desc_html += '	<div class="description-wrapper">'
-		    desc_html += '		<h3>' + p.brand.name + '</h3>'
-		    desc_html += '		<h4>' + p.name + '</h4>'
-		    desc_html += '		<p>' + p.description + '</p>'
-		    desc_html += '		<div class="price">US$' + p.price.to_s + '</div>'
-		    		
-		    desc_html += '		<a href= "http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '" class="purchase-button" target="_blank" onclick="javascript:pageview(\'' + p.brand.id.to_s + '\', \'http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '\');">PURCHASE from levi.com</a>'
-		    desc_html += '		<div class="other-buttons">'
-		    desc_html += '			<a href="javascript:add_wishlist(\'' + p.id.to_s + '\');">ADD TO WISH LIST</a>'
-		    desc_html += '			<a href="#" class="last">SHARE THIS ITEM</a>'
-		    desc_html += '		</div>'
-		    		
-		    desc_html += '	</div>'
+	      		desc_html += '<div class="item-description description' + p.id.to_s + '">'
+	      		desc_html += '	<div class="close-icon">'
+	      		desc_html += '		<a href="#"><img src="/assets/icons/close.png"></a>'
+	      		desc_html += '	</div>'
+		    	desc_html += '	<div class="image-wrapper">'
+		    	desc_html += '		<img class="lazy" src="/assets/shop/items/item1.jpg" alt="" data-original="' + images.last.image_path + '">'
+			    desc_html += '	</div>'
+			    
+			    desc_html += '	<div class="thumbs-wrapper">'
+			    
+			   	desc_html += thumb_html
+			    thumb_html = ''
+			 
+			    desc_html += '	</div>'
+			    desc_html += '	<div class="description-wrapper">'
+			    desc_html += '		<h3>' + p.brand.name + '</h3>'
+			    desc_html += '		<h4>' + p.name + '</h4>'
+			    desc_html += '		<p>' + p.description + '</p>'
+			    desc_html += '		<div class="price">US$' + p.price.to_s + '</div>'
+			    		
+			    desc_html += '		<a href= "http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '" class="purchase-button" target="_blank" onclick="javascript:pageview(\'' + p.brand.id.to_s + '\', \'http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '\');">PURCHASE from levi.com</a>'
+			    desc_html += '		<div class="other-buttons">'
+			    desc_html += '			<a href="javascript:add_wishlist(\'' + p.id.to_s + '\');">ADD TO WISH LIST</a>'
+			    desc_html += '			<a href="#" class="last">SHARE THIS ITEM</a>'
+			    desc_html += '		</div>'
+			    		
+			    desc_html += '	</div>'
 	    	
-	      desc_html += ' </div>'
+	      		desc_html += ' </div>'
 	      
-	      if i == 3
-	      	row_num += 1
+	      		if i == 3
+	      			row_num += 1
 					i = 0
 		%>
 					<div class="items-row clearfix">

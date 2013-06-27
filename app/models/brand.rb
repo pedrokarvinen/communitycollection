@@ -1,5 +1,5 @@
 class Brand < ActiveRecord::Base
-  attr_accessible :name, :slug, :about, :created_at, :updated_at
+  attr_accessible :name, :slug, :about, :thumbnail, :created_at, :updated_at
   belongs_to  :user
   has_many :initiatives
   has_many :categories

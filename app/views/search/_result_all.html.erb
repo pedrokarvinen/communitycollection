@@ -87,9 +87,12 @@ function pageview(brand_id, page_url){
 	<hr></hr>
 	<ul class="products">
 	<% if @result[:products_count] > 0 %>
-		<% @result[:products].each do |p| %>
+		<% 	
+		@result[:products].each do |p|
+			images = p.images[0..-1] 
+		%>
 			<li>
-				<img src="<%=p.images.first.thumb_path %>" width="60" height="60">
+				<img src="<%=images.last.thumb_path %>" width="60" height="60">
 				<div class="intro">
 					<a href="http://us.levi.com/product/index.jsp?productId=<%=p.prod_id %>" target="_blank" onclick="javascript:pageview(\'' + p.brand.id.to_s + '\', \'http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '\');">
 						<h6><%=p.name %></h6>

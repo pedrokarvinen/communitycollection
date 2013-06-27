@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130615233350) do
     t.string   "name"
     t.string   "slug"
     t.text     "about"
+    t.string   "thumbnail"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

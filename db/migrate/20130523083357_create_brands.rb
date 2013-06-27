@@ -5,6 +5,7 @@ class CreateBrands < ActiveRecord::Migration
       t.string :name
       t.string :slug
       t.text :about
+      t.string :thumbnail
       t.timestamp :created_at
       t.timestamp :updated_at  
     end
