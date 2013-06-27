@@ -10,7 +10,9 @@ $base_yellow    : #ffc231;
 $base_orange    : #ff5131;
 $base_darkblue  : #107090;
 
-@import "../sass/_mixins";
+@import "../sass/_search";
+
+@import "../sass/ixins";
 @import "../sass/_typography";
 @import "../sass/_buttons";
 @import "../sass/_grid";
@@ -24,8 +26,6 @@ $base_darkblue  : #107090;
 
 @import "../sass/backend/_dashboard";
 @import "../sass/auth/_auth";
-
-@import "../sass/earch";
 
 body {
   background: #fff;
