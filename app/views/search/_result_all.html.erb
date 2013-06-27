@@ -92,7 +92,7 @@ function pageview(brand_id, page_url){
 			images = p.images[0..-1] 
 		%>
 			<li>
-				<img src="<%=images.last.thumb_path %>" width="60" height="60">
+				<img src="<%=images.first.thumb_path %>" width="60" height="60">
 				<div class="intro">
 					<a href="http://us.levi.com/product/index.jsp?productId=<%=p.prod_id %>" target="_blank" onclick="javascript:pageview(\'' + p.brand.id.to_s + '\', \'http://us.levi.com/product/index.jsp?productId=' + p.prod_id.to_s + '\');">
 						<h6><%=p.name %></h6>
